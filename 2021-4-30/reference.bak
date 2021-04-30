@@ -1,0 +1,130 @@
+% Encoding: UTF-8
+
+@Article{lustig2007sparse,
+  author     = {Lustig, Michael and Donoho, David and Pauly, John M},
+  journal    = {Magnetic Resonance in Medicine: An Official Journal of the International Society for Magnetic Resonance in Medicine},
+  title      = {Sparse MRI: The application of compressed sensing for rapid MR imaging},
+  year       = {2007},
+  number     = {6},
+  pages      = {1182--1195},
+  volume     = {58},
+  file       = {:F\:/研究生学习书籍/2007_Sparse MRI_The application of compressed sensing for rapid MR imaging(1).pdf:PDF;:F\:/研究生学习书籍/2007_Sparse MRI_The application of compressed sensing for rapid MR imaging(1).pdf:PDF},
+  keywords   = {read},
+  publisher  = {Wiley Online Library},
+  readstatus = {read},
+}
+
+@Article{pruessmann1999sense,
+  author    = {Pruessmann, Klaas P and Weiger, Markus and Scheidegger, Markus B and Boesiger, Peter},
+  journal   = {Magnetic Resonance in Medicine: An Official Journal of the International Society for Magnetic Resonance in Medicine},
+  title     = {SENSE: sensitivity encoding for fast MRI},
+  year      = {1999},
+  number    = {5},
+  pages     = {952--962},
+  volume    = {42},
+  file      = {:Sense:PDF;:(SICI)1522-2594(199911)42_5_952__AID-MRM16_3.0.CO\;2-S.pdf:PDF},
+  publisher = {Wiley Online Library},
+}
+
+@Article{li2016adaptive,
+  author    = {Li, Yan-Ran and Chan, Raymond H and Shen, Lixin and Hsu, Yung-Chin and Isaac Tseng, Wen-Yih},
+  journal   = {SIAM Journal on Imaging Sciences},
+  title     = {An adaptive directional Haar framelet-based reconstruction algorithm for parallel magnetic resonance imaging},
+  year      = {2016},
+  number    = {2},
+  pages     = {794--821},
+  volume    = {9},
+  file      = {:pmri_yanran.pdf:PDF},
+  publisher = {SIAM},
+}
+
+@Article{uecker2014espirit,
+  author    = {Uecker, Martin and Lai, Peng and Murphy, Mark J and Virtue, Patrick and Elad, Michael and Pauly, John M and Vasanawala, Shreyas S and Lustig, Michael},
+  journal   = {Magnetic resonance in medicine},
+  title     = {ESPIRiT—an eigenvalue approach to autocalibrating parallel MRI: where SENSE meets GRAPPA},
+  year      = {2014},
+  number    = {3},
+  pages     = {990--1001},
+  volume    = {71},
+  file      = {:mrm.24751.pdf:PDF},
+  publisher = {Wiley Online Library},
+}
+
+@Article{griswold2002generalized,
+  author    = {Griswold, Mark A and Jakob, Peter M and Heidemann, Robin M and Nittka, Mathias and Jellus, Vladimir and Wang, Jianmin and Kiefer, Berthold and Haase, Axel},
+  journal   = {Magnetic Resonance in Medicine: An Official Journal of the International Society for Magnetic Resonance in Medicine},
+  title     = {Generalized autocalibrating partially parallel acquisitions (GRAPPA)},
+  year      = {2002},
+  number    = {6},
+  pages     = {1202--1210},
+  volume    = {47},
+  file      = {:mrm.10171.pdf:PDF;:GRAPPA.pdf:PDF},
+  publisher = {Wiley Online Library},
+}
+
+@Article{pruessmann1999sense,
+  author    = {Pruessmann, Klaas P and Weiger, Markus and Scheidegger, Markus B and Boesiger, Peter},
+  journal   = {Magnetic Resonance in Medicine: An Official Journal of the International Society for Magnetic Resonance in Medicine},
+  title     = {SENSE: sensitivity encoding for fast MRI},
+  year      = {1999},
+  number    = {5},
+  pages     = {952--962},
+  volume    = {42},
+  file      = {:(SICI)1522-2594(199911)42_5_952__AID-MRM16_3.0.CO\;2-S.pdf:PDF},
+  publisher = {Wiley Online Library},
+}
+
+@Article{lustig2010spirit,
+  author    = {Lustig, Michael and Pauly, John M},
+  journal   = {Magnetic resonance in medicine},
+  title     = {SPIRiT: iterative self-consistent parallel imaging reconstruction from arbitrary k-space},
+  year      = {2010},
+  number    = {2},
+  pages     = {457--471},
+  volume    = {64},
+  file      = {:2010_SPIRiT_Iterative self‐consistent parallel imaging reconstruction from arbitrary k‐space.pdf:PDF},
+  publisher = {Wiley Online Library},
+}
+
+@Article{8428648,
+  author  = {J. {Lyu} and U. {Nakarmi} and D. {Liang} and J. {Sheng} and L. {Ying}},
+  journal = {IEEE Transactions on Medical Imaging},
+  title   = {KerNL: Kernel-Based Nonlinear Approach to Parallel MRI Reconstruction},
+  year    = {2019},
+  number  = {1},
+  pages   = {312-321},
+  volume  = {38},
+  doi     = {10.1109/TMI.2018.2864197},
+  file    = {:Kernel-Based Nonlinear Approach to Parallel MRI Reconstruction.pdf:PDF},
+}
+
+@Article{LI2021332,
+  author   = {Yan-Ran Li and Raymond H.F. Chan and Lixin Shen and Xiaosheng Zhuang},
+  journal  = {Applied and Computational Harmonic Analysis},
+  title    = {Regularization with multilevel non-stationary tight framelets for image restoration},
+  year     = {2021},
+  issn     = {1063-5203},
+  pages    = {332-348},
+  volume   = {53},
+  abstract = {Variational regularization models are one of the popular and efficient approaches for image restoration. The regularization functional in the model carries prior knowledge about the image to be restored. The prior knowledge, in particular for natural images, are the first-order (i.e. variance in luminance) and second-order (i.e. contrast and texture) information. In this paper, we propose a model for image restoration, using a multilevel non-stationary tight framelet system that can capture the image's first-order and second-order information. We develop an algorithm to solve the proposed model and the numerical experiments show that the model is effective and efficient as compared to other higher-order models.},
+  doi      = {https://doi.org/10.1016/j.acha.2021.03.003},
+  file     = {:2021_Regularization with multilevel non-stationary tight framelets for image restoration(1).pdf:PDF},
+  url      = {https://www.sciencedirect.com/science/article/pii/S1063520321000221},
+}
+
+@Article{7547372,
+  author  = {K. H. {Jin} and D. {Lee} and J. C. {Ye}},
+  journal = {IEEE Transactions on Computational Imaging},
+  title   = {A General Framework for Compressed Sensing and Parallel MRI Using Annihilating Filter Based Low-Rank Hankel Matrix},
+  year    = {2016},
+  number  = {4},
+  pages   = {480-495},
+  volume  = {2},
+  doi     = {10.1109/TCI.2016.2601296},
+  file    = {:2016_ALOHA-A general framework for compressed sensing and parrllel MRI using annihilating filter based low-rank Hankel Matrix.pdf:PDF},
+}
+
+@Article{,
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

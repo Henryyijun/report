@@ -11,13 +11,32 @@
 \usepackage{amsfonts,rotating}
 \usepackage{color}
 \usepackage{verbatim,multirow}
+\bibliographystyle{IEEEtran}
+
+\textwidth 7.0true in
+\textheight 8.9 true in
+\topmargin=-20pt
+\headheight=6pt
+\headsep=2pt
+\oddsidemargin -0.3true in
+\evensidemargin -0.4true in
 
 \title{pMRI研究现状}
 \author{Henry}
 \begin{document}
 	\maketitle 
-	\section{研究现状}
 	
-	\section{}
+	\section{背景}
+	\par 磁共振成像(Magnetic Resonance Imaging,MRI)是一项无创的医学成像技术，用于检测人体组织中是否存在病变等情况，因此在临床上被广泛引用。但是由于其成像速度过于缓慢，并行磁共振成像(Parallel Magnetic Resonance Imaging,pMRI)用以加速成像，它同时使用多个线圈采集磁共振信号，使用下采样的方法只采集部分数据，最后使用重建算法从欠采样的数据中得到目标图像。
+	\section{国内外研究现状}
+	\par 使用重建算法从欠采样的数据中得到目标图像，主要可以分为两大类方法：(1)基于图像域的算法，例如Sensitivity encoding(SENSE)\cite{pruessmann1999sense}；(2)基于频率域的算法，例如Generalized Autocalibrating Partially Parallel Acquisitions(GRAPPA) \cite{griswold2002generalized}。
+		
+	\subsection{基于图像域的重建方法}
+	\par
 	
+	
+	\subsection{基于频率域的重建方法} 
+	
+	\newpage
+	\bibliography{reference}
 \end{document}
