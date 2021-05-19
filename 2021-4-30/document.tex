@@ -20,6 +20,7 @@
 \headsep=2pt
 \oddsidemargin -0.3true in
 \evensidemargin -0.4true in
+\setlength{\parskip}{0.3em}
 
 \title{pMRI研究现状}
 \author{Henry}
@@ -27,15 +28,19 @@
 	\maketitle 
 	
 	\section{背景}
-	\par 磁共振成像(Magnetic Resonance Imaging,MRI)是一项无创的医学成像技术，用于检测人体组织中是否存在病变等情况，因此在临床上被广泛引用。但是由于其成像速度过于缓慢，并行磁共振成像(Parallel Magnetic Resonance Imaging,pMRI)用以加速成像，它同时使用多个线圈采集磁共振信号，使用下采样的方法只采集部分数据，最后使用重建算法从欠采样的数据中得到目标图像。
+	\par 磁共振成像(Magnetic Resonance Imaging,MRI)是一项无创的医学成像技术，用于检测人体组织中是否存在病变等情况，因此在临床上被广泛引用。但是由于其成像速度过于缓慢，并行磁共振成像(Parallel Magnetic Resonance Imaging,pMRI)用以加速成像，它同时使用多个线圈采集磁共振信号，使用欠采样的方法只采集部分数据，最后使用重建算法从欠采样的数据中重建得到目标图像。
 	\section{国内外研究现状}
-	\par 使用重建算法从欠采样的数据中得到目标图像，主要可以分为两大类方法：(1)基于图像域的算法，例如Sensitivity encoding(SENSE)\cite{pruessmann1999sense}；(2)基于频率域的算法，例如Generalized Autocalibrating Partially Parallel Acquisitions(GRAPPA) \cite{griswold2002generalized}。
+	\par 使用重建算法从欠采样的数据中得到目标图像，主要可以分为两大类方法：(1)基于图像域的算法，例如Sensitivity encoding(SENSE)\cite{pruessmann1999sense}；(2)基于$k$-空间的算法，例如Generalized Autocalibrating Partially Parallel Acquisitions(GRAPPA) \cite{griswold2002generalized}。
 		
 	\subsection{基于图像域的重建方法}
-	\par
+	\par pMRI系统使用一组线圈阵列进行同时采集数据，线圈阵列由多个线圈组成，用于采集不同空间位置上的信息，使得越接近线圈的区域上信号会更强，这种不同空间位置导致的信号强弱被称为线圈的敏感度。通常情况下，线圈的敏感度未知，而基于图像域的重建方法首先需要明确知道敏感度矩阵，因此重建图像的质量十分依赖于敏感度信息。
+	\par 在图像域中广泛使用的是SENSE类重建方法，其将pMRI图像重建问题视作一个逆问题进行考虑，在最小二乘意义下最小化测量值与真实值之间的误差。在一般情况下，pMRI图像重建问题是一个病态问题，因此需要进行正则化处理，广泛使用的正则化方法有 $l_1$正则化，$l_2$正则化等。
+	\par 近年来，稀疏约束和低秩约束等正则化方法被广泛应用到pMRI图像重建问题中，Lustig等人将压缩感知应用于MRI图像重建中(CS MRI)\cite{lustig2007sparse}，其实验表明该方法可以较好的去除图像伪影，得到较高质量的重建图像。Martin Uecker等人提出了一种估计敏感度矩阵的方法\cite{uecker2014espirit}，该方法使用自校准数据构造得到自校准矩阵，对校准矩阵进行奇异值分解，之后使用右奇异矩阵进行构造得到filters，对filter傅里叶逆变换后进行特征值分解，只取特征值为1的对应的特征向量构造敏感度矩阵。紧接着他们提出了“soft” SENSE模型，使用多组敏感度矩阵和多组图像分量用于重建，最后使用具有稀疏性的$l_1$范数得到了$l_1$-ESPIRiT方法。Liu等人提出了projectediterative soft-thresholding algorithm(pISTA),与其加速版本pFISTA\cite{7448403}，所提出的算法利用了MRI图像在紧框架表示下的冗余性，且该算法只有一个需要调节的参数。pFISTA虽然算法简洁且参数简单，但是其收敛性只适用于单线圈，而不适用于并行磁共振成像。Zhang等人对Liu等人提出的pFISTA进行了改进，分析了该算法在多线圈并行磁共振成像下的收敛性，提出了pFISTA并行成像版本\cite{ZHANG2021101987}。同时将该算法应用于两个经典重建模型中，SENSE\cite{pruessmann1999sense}和SPIRiT\cite{lustig2010spirit}，提供了pFISTA求解这两个模型的最优参数。
+	\par dads\cite{8017620} asdasd \cite{8428648}
 	
 	
-	\subsection{基于频率域的重建方法} 
+	
+	\subsection{基于$k$-空间的重建方法} 
 	
 	\newpage
 	\bibliography{reference}

@@ -34,4 +34,47 @@ M.~A. Griswold, P.~M. Jakob, R.~M. Heidemann, M.~Nittka, V.~Jellus, J.~Wang,
   Journal of the International Society for Magnetic Resonance in Medicine},
   vol.~47, no.~6, pp. 1202--1210, 2002.
 
+\bibitem{lustig2007sparse}
+M.~Lustig, D.~Donoho, and J.~M. Pauly, ``Sparse mri: The application of
+  compressed sensing for rapid mr imaging,'' \emph{Magnetic Resonance in
+  Medicine: An Official Journal of the International Society for Magnetic
+  Resonance in Medicine}, vol.~58, no.~6, pp. 1182--1195, 2007.
+
+\bibitem{uecker2014espirit}
+M.~Uecker, P.~Lai, M.~J. Murphy, P.~Virtue, M.~Elad, J.~M. Pauly, S.~S.
+  Vasanawala, and M.~Lustig, ``Espirit—an eigenvalue approach to
+  autocalibrating parallel mri: where sense meets grappa,'' \emph{Magnetic
+  resonance in medicine}, vol.~71, no.~3, pp. 990--1001, 2014.
+
+\bibitem{7448403}
+Y.~Liu, Z.~Zhan, J.-F. Cai, D.~Guo, Z.~Chen, and X.~Qu, ``Projected iterative
+  soft-thresholding algorithm for tight frames in compressed sensing magnetic
+  resonance imaging,'' \emph{IEEE Transactions on Medical Imaging}, vol.~35,
+  no.~9, pp. 2130--2140, 2016.
+
+\bibitem{ZHANG2021101987}
+\BIBentryALTinterwordspacing
+X.~Zhang, H.~Lu, D.~Guo, L.~Bao, F.~Huang, Q.~Xu, and X.~Qu, ``A guaranteed
+  convergence analysis for the projected fast iterative soft-thresholding
+  algorithm in parallel mri,'' \emph{Medical Image Analysis}, vol.~69, p.
+  101987, 2021. [Online]. Available:
+  \url{https://www.sciencedirect.com/science/article/pii/S1361841521000335}
+\BIBentrySTDinterwordspacing
+
+\bibitem{lustig2010spirit}
+M.~Lustig and J.~M. Pauly, ``Spirit: iterative self-consistent parallel imaging
+  reconstruction from arbitrary k-space,'' \emph{Magnetic resonance in
+  medicine}, vol.~64, no.~2, pp. 457--471, 2010.
+
+\bibitem{8017620}
+S.~Wang, S.~Tan, Y.~Gao, Q.~Liu, L.~Ying, T.~Xiao, Y.~Liu, X.~Liu, H.~Zheng,
+  and D.~Liang, ``Learning joint-sparse codes for calibration-free parallel mr
+  imaging,'' \emph{IEEE Transactions on Medical Imaging}, vol.~37, no.~1, pp.
+  251--261, 2018.
+
+\bibitem{8428648}
+J.~{Lyu}, U.~{Nakarmi}, D.~{Liang}, J.~{Sheng}, and L.~{Ying}, ``Kernl:
+  Kernel-based nonlinear approach to parallel mri reconstruction,'' \emph{IEEE
+  Transactions on Medical Imaging}, vol.~38, no.~1, pp. 312--321, 2019.
+
 \end{thebibliography}

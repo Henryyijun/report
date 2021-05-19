@@ -249,14 +249,5 @@ doi = {10.1109/IEMBS.2008.4649495}
   volume={63},
   number={9},
   pages={1850-1861},
-  doi={10.1109/TBME.2015.2503756}}@article{ying2007joint,
-  title={Joint image reconstruction and sensitivity estimation in SENSE (JSENSE)},
-  author={Ying, Leslie and Sheng, Jinhua},
-  journal={Magnetic Resonance in Medicine: An Official Journal of the International Society for Magnetic Resonance in Medicine},
-  volume={57},
-  number={6},
-  pages={1196--1202},
-  year={2007},
-  publisher={Wiley Online Library}
-}
+  doi={10.1109/TBME.2015.2503756}}
 @Comment{jabref-meta: databaseType:bibtex;}
