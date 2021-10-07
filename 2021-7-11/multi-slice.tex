@@ -1,0 +1,105 @@
+%!TEX program = xelatex
+% 完整编译: xelatex -> bibtex -> xelatex -> xelatex
+\documentclass[lang=cn,11pt,a4paper,cite=numbers]{elegantpaper}
+
+\title{Multi Slice pMRI Model}
+\author{Henry}
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+\begin{document}
+
+\maketitle
+\section{Multi slice pMRI reconstruction model by 3D regularization} 
+\par pMRI设备采集到的是包含多个切片的k-space数据，每个切片数据通过傅里叶逆变换之后都可以得到对应切片的图像。因此我们可以使用3D正则化的方法对多个相近的切片进行约束，以达到更好的重建质量。
+\par 第$i$个切片图像的第$l$个线圈数据定义为
+\begin{equation}\label{coil}
+	g_{il} = PFS_{il}u_i + \eta_{il},l=1,\dots,p
+\end{equation}
+其中$\eta_{il}$白噪声，$S_{il}$是对应的敏感度矩阵，$F$表示傅里叶变换，$P$为采样矩阵，其对角元素为0或者1，$u_i$是第$i$个切片图像。
+\par 将单个切片的所有线圈数据进行组合，可以得到
+\begin{equation}
+	g_i = QM_i u_i + \eta_i
+\end{equation}
+其中$g_i$ 是 $g_{il}, l=1,\dots,p$通过堆叠而成的矩阵，各个符号的具体定义为
+\begin{equation}
+	g_i = \begin{bmatrix}
+		g_{i1}\\
+		\vdots \\
+		g_{ip}
+	\end{bmatrix},
+	F = \begin{bmatrix}
+		F & &\\
+		&\ddots &\\
+		& & F
+	\end{bmatrix},
+	M_i = F\begin{bmatrix}
+		S_{i1}\\
+		\vdots \\
+		S_{ip}
+	\end{bmatrix},
+	Q=\begin{bmatrix}
+		P & &\\
+		&\ddots &\\
+		& & P
+	\end{bmatrix},
+	\eta_i = \begin{bmatrix}
+		\eta_{i1}\\
+		\vdots \\
+		\eta_{ip}
+	\end{bmatrix}
+\end{equation}
+如果我们同时用两张切片图像进行重建，此时的重建模型为
+\begin{equation}\label{multiSlice}
+	\{\hat{u_1}, \hat{u_2}\} = \underset{u_1, u_2}{argmin}\left\{ \frac{1}{2} \left \Vert 
+	\begin{bmatrix}
+		Q_1 & 0\\
+		0 & Q_2
+	\end{bmatrix}
+	\begin{bmatrix}
+		M_1 & 0 \\
+		0 & M_2 \\
+	\end{bmatrix}
+	\begin{bmatrix}
+		u_1 \\
+		u_2
+	\end{bmatrix}
+	- \begin{bmatrix}
+		g_1 \\
+		g_2
+	\end{bmatrix}
+	 \right\Vert_2^2 + 
+	 \left\Vert
+	 \Gamma W_{3D} 
+	 \begin{bmatrix}
+	 	u_1 \\
+	 	u_2
+	 \end{bmatrix}
+	 \right\Vert_1
+	 \right\}
+\end{equation}
+令 $u = [u_1 \quad u_2]^T, g = [g_1 \quad g_2]^T$,此时(\ref{multiSlice}) 可以写成
+\begin{equation} \label{msmodel}
+	\hat{u} = \underset{u}{argmin} \{\frac{1}{2} \Vert QMu-g \Vert_2^2 + \Vert \Gamma W_{3D}u \Vert_1\}
+\end{equation}
+其中$\Gamma$ 为正则化参数矩阵，对角线上元素非0, $W_{3D}$是3维紧框架变换矩阵。
+\section{Algorithm}
+\par 令$K = QM, A = W_{3D}$, 并且定义函数$f$和$h$分别为：
+\begin{equation}
+	f(u) = \frac{1}{2}\Vert Ku-g \Vert_2^2, h(u) = \Vert \Gamma u\Vert_1
+\end{equation}
+因此(\ref{msmodel})可以写成
+\begin{equation}\label{msmodel2}
+	\underset{u}{min} \{f(u) + h(Au)\}
+\end{equation}
+此时用于求解模型 (\ref{msmodel2})的PD3O算法步骤为
+
+\begin{align}
+	s^{k+1}&=prox_{\delta h^*}((I-\gamma \delta AA^T)s^k + \delta A(u^k - \gamma \nabla f(u^k))) \\
+	u^{k+1}& = u^k - \gamma \nabla f(u^k) -\gamma A^T s^{k+1} 
+\end{align}
+其中 $\nabla f(u) = K^T(Ku - g)$, 因此$f$的梯度为 $\Vert K \Vert_2^2-Lipschitz $连续函数。
+\newpage
+\bibliographystyle{unsrt}
+\bibliography{reference}
+
+\end{document}

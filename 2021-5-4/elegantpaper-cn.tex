@@ -16,28 +16,34 @@
 \section{背景}
 \par 磁共振成像(Magnetic Resonance Imaging,MRI)是一项无创的医学成像技术，用于检测人体组织中是否存在病变等情况，因此在临床上被广泛引用。但是由于其成像速度过于缓慢，并行磁共振成像(Parallel Magnetic Resonance Imaging,pMRI)用以加速成像，它同时使用多个线圈采集磁共振信号，使用欠采样的方法只采集部分数据，最后使用重建算法从欠采样的数据中重建得到目标图像。
 \section{国内外研究现状}
-\par 使用重建算法从欠采样的数据中得到目标图像，主要可以分为两大类方法：(1)基于图像域的算法，例如Sensitivity encoding(SENSE)\cite{pruessmann1999sense}；(2)基于$k$-空间的算法，例如Generalized Autocalibrating Partially Parallel Acquisitions(GRAPPA) \cite{griswold2002generalized}。
+\par 使用重建算法从欠采样的数据中得到目标图像，主要可以分为三大类方法：(1)基于图像域的算法，例如Sensitivity encoding(SENSE)\cite{pruessmann1999sense}；(2)基于$k$-空间的插值算法，例如Generalized Autocalibrating Partially Parallel Acquisitions(GRAPPA) \cite{griswold2002generalized};(3)基于$k$-空间进行低秩补全或者联和稀疏特性的无校准算法，例如SAKE\cite{2015Calibrationless}。
 
 \subsection{基于图像域的重建方法}
 \par pMRI系统使用一组线圈阵列进行同时采集数据，线圈阵列由多个线圈组成，用于采集不同空间位置上的信息，使得越接近线圈的区域上信号会更强，这种不同空间位置导致的信号强弱被称为线圈的敏感度。通常情况下，线圈的敏感度未知，而基于图像域的重建方法首先需要明确知道敏感度矩阵，因此重建图像的质量十分依赖于敏感度信息。
 
-\par 在图像域中广泛使用的是SENSE类重建方法，其将pMRI图像重建问题视作一个逆问题进行考虑，在最小二乘意义下最小化测量值与真实值之间的误差。在一般情况下，pMRI图像重建问题是一个病态问题，因此需要进行正则化处理，广泛使用的正则化方法有 $l_1$正则化，$l_2$正则化等。但是在现有的SENSE类方法中，从较少的ACS数据中估计得到的敏感度矩阵仍然不太准确，例如Ying等人提出的JSENSE\cite{ying2007joint}，该算法将MRI图像重建问题转为线圈敏感度和图像的联合估计问题，使用优化迭代算法进行求解。相比于JSENSE，ESPIRiT\cite{uecker2014espirit}将GRAPPA和SENSE的思想融合在一起，使用滑动窗口构建校准矩阵，并且对校准矩阵进行奇异值分解和特征值分解的方法，从ACS中估计出较为准确的敏感度矩阵，进而提出soft SENSE方法，使用多张敏感度矩阵的方式进行重建，再对多张图像分量使用$l_1$范数约束，最后利用共轭梯度法求解，将得到的多张图像分量使用SOS进行合并。
+\par 在图像域中广泛使用的是SENSE类重建方法，其将pMRI图像重建问题视作一个逆问题进行考虑，在最小二乘意义下最小化测量值与真实值之间的误差，具体数学模型为
+\begin{equation}
+	\hat{u} = \underset{u}{argmin} \frac{1}{2} \left \Vert  PFSu - g \right\Vert_2^2
+\end{equation}
+其中$u$是待求解的图像，$S$表示敏感度矩阵，$P$为采样矩阵，$g$表示采集得到的数据。 但是在通常情况下，pMRI图像重建问题是一个病态问题，因此需要进行正则化处理，广泛使用的正则化方法有 $l_1$正则化，$l_2$正则化等。因此带有正则化的重建模型为
+\begin{equation}
+	\hat{u} = \underset{u}{argmin} \frac{1}{2} \left\{ \Vert  PFSu - g \Vert_2^2  + \lambda R(u) \right \}
+\end{equation}
+其中$R(u)$表示正则项，$\lambda$称为正则化参数，用以平衡精确项和正则项。常用于pMRI重建问题的正则化方法有全变差正则化(Total variation, TV)\cite{2010Undersampled, 2012Image}，小波正则化\cite{2011A}等。而且随着压缩感知(Compressed Sensing, CS)等理论的研究深入，Lustig等人发现一些MRI图像中的像素表示是较为稀疏的，如果使用适当的重建算法，具有稀疏性的MRI图像将可以从任意采样的k-空间数据中得到恢复，因此提出了Sparse-MRI\cite{lustig2007sparse},该方法也奠定了CS与MRI结合的算法框架。Liang等人将CS-MRI和SENSE方法结合一起，提出了CS-SENSE\cite{liang2009accelerating}。
+\par 在现有的SENSE类方法中，从较少的ACS数据中估计得到的敏感度矩阵仍然不太准确，因此Ying等人提出JSENSE\cite{ying2007joint}，该算法将MRI图像重建问题转为线圈敏感度和图像的联合估计问题，使用优化迭代算法进行交替求解。相比于JSENSE，ESPIRiT\cite{uecker2014espirit}将GRAPPA和SENSE的思想融合在一起，使用滑动窗口构建校准矩阵，并且对校准矩阵进行奇异值分解和特征值分解的方法，从ACS中估计出较为准确的敏感度矩阵，进而提出soft SENSE方法，使用多张敏感度矩阵的方式进行重建，再对多张图像分量使用$l_1$范数约束，最后利用共轭梯度法求解，将得到的多张图像分量使用SOS进行合并。
+\par Li等人提出了一种新的pMRI重建模型，该模型的正则项使用一个二维紧框架系统，称作DHF\cite{li2016adaptive}，能够检测图像水平，垂直和$45^{\circ}$方向的边缘特征，并且使用自动估计正则化参数的方法，避免人工调节参数。该文中实验表明，相比于其他传统的正则化方法(TV),还有ESPIRiT等，图像重建质量都有所提升。
 
-\par 随着压缩感知(Compressed Sensing, CS)等理论的研究深入，Lustig等人发现一些MRI图像中的像素表示是较为稀疏的，如果使用适当的重建算法，具有稀疏性的MRI图像将可以从任意采样的k-空间数据中得到恢复，因此提出了Sparse-MRI\cite{lustig2007sparse},该方法也奠定了CS与MRI结合的算法框架。Liang等人将CS-MRI和SENSE方法结合一起，提出了CS-SENSE\cite{liang2009accelerating}。
-
-\par Liu等人提出了projectediterative soft-thresholding algorithm(pISTA),与其加速版本pFISTA\cite{7448403}，所提出的算法利用了MRI图像在紧框架表示下的冗余性，且该算法只有一个需要调节的参数。pFISTA虽然算法简洁且参数简单，但是其收敛性只适用于单线圈，而不适用于并行磁共振成像。Zhang等人对Liu等人提出的pFISTA进行了改进，分析了该算法在多线圈并行磁共振成像下的收敛性，提出了pFISTA并行成像版本\cite{ZHANG2021101987}。同时将该算法应用于两个经典重建模型中，SENSE\cite{pruessmann1999sense}和SPIRiT\cite{lustig2010spirit}，提供了pFISTA求解这两个模型的最优参数。
+\par Liu等人提出了projected iterative soft-thresholding algorithm(pISTA),与其加速版本pFISTA\cite{7448403}，所提出的算法利用了MRI图像在紧框架表示下的冗余性，且该算法只有一个需要调节的参数。pFISTA虽然算法简洁且参数简单，但是其收敛性只适用于单线圈，而不适用于并行磁共振成像。Zhang等人对Liu等人提出的pFISTA进行了改进，分析了该算法在多线圈并行磁共振成像下的收敛性，提出了pFISTA并行成像版本\cite{ZHANG2021101987}。同时将该算法应用于两个经典重建模型中，SENSE\cite{pruessmann1999sense}和SPIRiT\cite{lustig2010spirit}，提供了pFISTA求解这两个模型的最优参数。
 
 \subsection{基于$k$-空间的重建方法} 
-\par 基于k-空间的重建方法与基于图像域方法的主要区别为，不需要明确知道线圈敏感度的信息，其信息隐含在k-空间的数据中。k-空间重建方法将pMRI重建问题视为一个矩阵
+\par 基于k-空间的重建方法与基于图像域方法的主要区别为，不需要明确知道线圈敏感度的信息，其信息隐含在k-空间的数据中。k-空间重建方法将pMRI重建问题视为一个矩阵填充问题，或者是低秩矩阵补全问题。如GRAPPA，该方法将缺失的数据视为已知数据的线性组合，通过类似插值的方法对未知像素点进行估计。Lusting等人基于GRAPPA的思想，提出一种新的自动校准方法SPIRiT\cite{lustig2010spirit}，使得未知点和它所在所有线圈上的整个邻域之间实施一致性，包括未知点与已知点，然后通过迭代求解的方法不断优化。
+\par 
 
 
 
 \newpage
 \bibliographystyle{unsrt}
 \bibliography{reference}
-
-
-
 
 
 \end{document}
