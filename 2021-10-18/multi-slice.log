@@ -1,0 +1,30 @@
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2021.10.27)  27 OCT 2021 10:34
+entering extended mode
+**multi-slice.tex
+(F:\汇报\2021-10-18\multi-slice.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for loaded.
+
+! LaTeX Error: File `elegantpaper.cls' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: cls)
+
+Enter file name: 
+! Emergency stop.
+<read *> 
+         
+l.4 ^^M
+       
+*** (cannot \read from terminal in nonstop modes)
+
+ 
+Here is how much of TeX's memory you used:
+ 10 strings out of 430478
+ 161 string characters out of 3191501
+ 44928 words of memory out of 3000000
+ 3238 multiletter control sequences out of 15000+200000
+ 3640 words of font info for 14 fonts, out of 3000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 10i,0n,7p,81b,8s stack positions out of 5000i,500n,10000p,200000b,50000s
+No pages of output.
