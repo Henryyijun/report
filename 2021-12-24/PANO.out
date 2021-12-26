@@ -1,0 +1,6 @@
+\BOOKMARK [1][-]{section.1}{Notation definition}{}% 1
+\BOOKMARK [1][-]{section.2}{Patch-based nonlocal operator\(PANO\)}{}% 2
+\BOOKMARK [1][-]{section.3}{MRI reconstruction model using PANO}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{PANO reconstruction model}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Choice of grouping}{section.3}% 5
+\BOOKMARK [1][-]{section.4}{Learn the nonlocal similarity from the guide image}{}% 6
