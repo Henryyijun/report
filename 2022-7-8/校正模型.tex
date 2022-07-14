@@ -1,0 +1,251 @@
+%\documentclass[journal]{IEEEtran}
+%\documentclass[12pt,onecolumn]{IEEEtran}
+\documentclass[UTF8]{article}
+\usepackage{ctex}
+\usepackage{geometry,graphicx,marvosym}
+\usepackage{amsmath,amsthm}
+\usepackage{amsfonts}
+\usepackage[usenames,dvipsnames]{pstricks}
+\usepackage{pst-plot,pstricks-add}
+%\usepackage{graphicx,times,amsmath,amssymb,multirow,subfigure}
+\usepackage{graphicx,times,amsmath,amssymb,multirow}
+\usepackage{url}
+\usepackage{stfloats}
+\usepackage{amsfonts,rotating}
+\usepackage{color}
+\usepackage{verbatim,multirow}
+% setting dimension of the paper
+\textwidth 7.0true in
+\textheight 8.9 true in
+\topmargin=-20pt
+\headheight=6pt
+\headsep=2pt
+\oddsidemargin -0.3true in
+\evensidemargin -0.4true in
+\usepackage{amssymb}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+
+\newcommand{\dtcwt}{\operatorname{DT-\mathbb{C}WT}}
+\newcommand{\tpctf}{\operatorname{TP-\mathbb{C}TF}}
+\newcommand{\ctf}{\operatorname{\mathbb{C}TF}}
+\newcommand{\tr}[1]{\textcolor{red}{#1}}
+\newcommand{\tb}[1]{\textcolor{blue}{#1}}
+\newcommand{\mO}{{\mathcal{T}}}
+\newcommand{\C}{\mathbb{C}}    %complex number field
+\newcommand{\N}{\mathbb{N}}    %natural numbers
+\newcommand{\R}{\mathbb{R}}    %real number field
+\newcommand{\Z}{\mathbb{Z}}    %integers
+\newcommand{\imag}{\mathrm{i}} % imaginary unit
+\newcommand{\dR}{\mathbb{R}^d}
+\newcommand{\dT}{\mathbb{T}^d}
+\newcommand{\dZ}{\mathbb{Z}^d}
+\newcommand{\dlp}[1]{l_{#1}(\mathbb{Z}^d)}
+\newcommand{\td}{\boldsymbol{\delta}}  %Dirac/Kronicker sequence
+\newcommand{\bp}{\begin{proof}}
+	\newcommand{\ep}{\hfill  \end{proof} }
+\newcommand{\be}{ \begin{equation} }
+\newcommand{\ee}{ \end{equation} }
+\newcommand{\dLp}[1]{L_{#1}(\mathbb{R}^d)}
+\newcommand{\prm}{P}           %projection matrix
+\newcommand{\wh}{\widehat}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\bs}{\backslash}
+\newcommand{\ol}{\overline}
+\newcommand{\vk}{\mathsf{k}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tp}{\mathsf{T}}  %transpose
+\newcommand{\conj}{\overline}
+\newcommand{\supp}{\mathrm{supp}}
+\newcommand{\setsp}{\;:\;}     %set separator
+\newcommand{\sd}{\mathcal{S}}  %subdivision operator S
+\newcommand{\tz}{\mathcal{T}}  %transition operator T
+\newcommand{\wt}{\widetilde}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\er}{\eqref}
+\newcommand{\gep}{\varepsilon}
+\newcommand{\eps}{\epsilon}
+\newcommand{\gl}{\lambda}
+\newcommand{\gL}{\Lambda}
+\newcommand{\gd}{\delta}
+\newcommand{\DAS}{\mathrm{DAS}}
+\newcommand{\UDAS}{\mathrm{UDAS}}
+\newcommand{\DHF}{\mathrm{DHF}}
+
+\newtheorem{example}{Example}
+\bibliographystyle{unsrt}
+\newcommand{\xz}[1]{\textcolor{magenta}{\bf #1}}
+\usepackage[colorlinks,linkcolor=blue,anchorcolor=blue,citecolor=blue]{hyperref}
+\usepackage{indentfirst}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+
+\begin{document}
+\author{Henry}
+\title{Calibration Observation Model for Parallel Magnetic Resonance Imaging}
+\maketitle
+
+\section{Introduction}
+\par SENSE and GRAPPA are widely used in clinical application, but these two models have some shortcomings. For the SENSE method, the coil sensitivity can be estimated, but it is still not accuracy. For the another method, the interpolation kernel can be estimated by the auto calibraion signal(ACS) while it's not accuracy when the number of the ACS line is far from enough.
+\par Therefore, we propose the calibration observation model incoporating the advantage of the SENSE and GRAPPA. We exploit the SENSE model to remove artifacts in image domain and use GRAPPA kernel to regularize the SENSE model in K-space domain.
+\section{SENSE model}
+\par The coil data from the $j$th coil can modeled as follows:
+\begin{equation}\label{eq:coil_equation}
+	g_l = PFS_lu + \eta
+\end{equation}
+where $u$ denotes the desired reconstruced image, $\eta$ is gaussian white noisy, $F$ is dicrete Fourier tranform matrix, and $P$ denotes the sampling matrix. 
+\par Combining equations from $p$ coils, we have 
+\begin{equation}\label{eq:system_equation}
+	g = \mathcal{P}Mu + \eta
+\end{equation}
+where,
+\begin{equation*}
+	g = \begin{bmatrix}
+		g_1 \\
+		\vdots \\
+		g_p
+	\end{bmatrix},
+   \mathcal{P} = \begin{bmatrix}
+	   	P & \quad&\quad \\
+	   	\quad& \ddots &\quad \\
+	   	\quad& \quad& P
+   \end{bmatrix},
+	M = \begin{bmatrix}
+		FS_1 \\
+		\vdots \\
+		FS_p
+	\end{bmatrix},
+	\eta =\begin{bmatrix}
+		\eta_1 \\
+		\vdots \\
+		\eta_p
+	\end{bmatrix}
+\end{equation*}
+\section{GRAPPA model}
+\par GRAPPA utilizes the interpolation kernel to estimate the missing point, assuming we use $G$ to represent the interpolation kernel, then we have
+\begin{equation} \label{GRAPPA_equation}
+	\mathcal{P}GMu \approx g
+\end{equation}
+
+\section{Calibration Observation Model}
+\par According to the model (\ref{eq:system_equation}) and (\ref{GRAPPA_equation}), we propose the following optimization model as
+\begin{equation}\label{mod_double_reg}
+	\min_{u} \left\{\frac{1}{2}\|\mathcal{P}Mu-g\|_2^2+  \frac{\lambda}{2}\|\mathcal{P}GMu-g \|_2^2 + \Phi_{1 \Lambda}(B_{1h} u) + \Phi_{2 \Theta}(B_{2h}B_{1l} u) \right\} 
+\end{equation}
+Model (\ref{mod_double_reg}) can be solved by PD3O.Define 
+\begin{equation*}
+	f(u) = \frac{1}{2}\|\mathcal{P}Mu-g\|_2^2+  \frac{\lambda}{2}\|\mathcal{P}GMu-g \|_2^2, \quad h(s) = \Phi_{1 \Lambda}(B_{1h} s_1) + \Phi_{2 \Theta}(B_{2h}B_{1l} s_2),\quad A = \begin{bmatrix}
+		B_{1h} \\
+		B_{2h}B_{1l}
+	\end{bmatrix}
+\end{equation*}
+where $s = (s_1, s_2)$. Then, the model(\ref{mod_double_reg}) can be rewriten as 
+\begin{equation}
+	\min_{u} \left\{ f(u) + h(Au) \right\}
+\end{equation}
+\par  $f(u) = \frac{1}{2}\|\mathcal{P}Mu-g\|_2^2+  \frac{\lambda}{2}\|\mathcal{P}GMu-g \|_2^2$ can be rewritten as:
+\begin{equation}\label{eq:fun}
+	f(u) = \frac{1}{2}\left 
+	\|\begin{bmatrix}
+		\mathcal{P}M \\
+		\sqrt{\lambda}\mathcal{P}GM 
+	\end{bmatrix} u - 
+	\begin{bmatrix}
+		g \\ g
+	\end{bmatrix}
+	\right \|_2^2
+\end{equation}
+Equation (\ref{eq:fun}) can be written in a more concise form :
+\begin{equation}
+	f(u) = \frac{1}{2}\| Ku - y\|_2^2
+\end{equation}
+where 
+\begin{equation*}\label{eq7}
+	K = \begin{bmatrix}
+		\mathcal{P}M \\
+		\sqrt{\lambda}\mathcal{P}GM 
+	\end{bmatrix},
+	y = \begin{bmatrix}
+		g \\
+		g
+	\end{bmatrix}
+\end{equation*}
+\par Accoding to the function $f$, we have that $\nabla f(u) = K^T(Ku-y) = M^T \mathcal{P}^T (\mathcal{P}Mu-g) + \lambda M^T G^T \mathcal{P}^T(\mathcal{P}GMu-g)$, and we can find that the gradient of $f$ is $\|K\|^2$-Lipschitz continuous.
+
+Choosing $\gamma $ and $\delta$ such that $\gamma < 2/ \|K\|^2$ and $\gamma \delta < 1$. The PD3O has the following iteration:
+\begin{align*}
+	u^{k} & = real(v^k)\\
+	s^{k+1} &= prox_{\delta h^*} ((I-\gamma \delta AA^T)s^k + \delta A(2u^k-v^k-\gamma \nabla f(u^k)))\\
+	v^{k+1} &= u^k-\gamma \nabla f(u^k) - \gamma A^T s^{k+1}
+\end{align*}
+where $\nabla f(u) = M^T \mathcal{P}^T (\mathcal{P}Mu-g) + \lambda M^T G^T \mathcal{P}^T(\mathcal{P}GMu-g)$.
+
+According to the Moreau decomposition, we can get 
+\begin{equation}
+	s^{k+1} = x^k - \delta prox_{\delta^{-1} h} (\delta^{-1} x^k)
+\end{equation}
+where $x^k = (I-\gamma \delta AA^T)s^k + \delta A(2u^k-v^k-\gamma \nabla f(u^k))$
+\begin{algorithm}[t]
+	\caption{\textbf{Double Domain Reconstruction Algorithm}}
+	\label{Alg:scanMatching}
+	\begin{algorithmic}[1]
+		\Require 
+		$g$ is acquired k-space data; $A$ is tight frame operator;
+		$k:= 0$ ; $u^0:= sos(F^{-1}g)$; $v^0 = u^0; s^0 = Au^0$; $\epsilon:=1e-5$
+		\Ensure $\gamma < 2/ \|K\|^2$ and $\gamma \delta < 1$
+		\State \textbf{while}  $k \leq k_{max}$ \textbf{and} $\|u^{k+1} - u^{k}\| \ge \epsilon$ \textbf{do}  
+		\State \ \ \ \ $u^{k} = real(v^{k})$
+		\State \ \ \ \ $x^k = (I-\gamma \delta AA^T)s^k + \delta A(2u^k-v^k-\gamma \nabla f(u^k))$
+		\State \ \ \ \ $s^{k+1} = x^k - \delta prox_{\delta^{-1} h} (\delta^{-1} x^k)$
+		\State \ \ \ \ $ v^{k+1} = u^k-\gamma \nabla f(u^k) - \gamma A^T s^{k+1}$		
+		\State \textbf{end while} 
+	\end{algorithmic}
+\end{algorithm}
+\begin{equation*}
+	\begin{aligned}
+	\|K\|^2 = \| K^T K\| &= \left \| 
+	\begin{bmatrix}
+		\mathcal{P} M \\
+		\mathcal{P} GM
+	\end{bmatrix}^T
+	\begin{bmatrix}
+		\mathcal{P} M \\
+		\mathcal{P} GM
+	\end{bmatrix} \right\| \\
+		 & =\left\| 
+		 \begin{bmatrix}
+			  M^T\mathcal{P}^T &
+			  M^T G^T\mathcal{P}^T
+		 \end{bmatrix} 
+	 	\begin{bmatrix}
+	 		\mathcal{P} M \\
+	 		\mathcal{P} GM
+	 	\end{bmatrix}
+		\right\| \\
+		& = \left\|
+		\begin{bmatrix}
+			M^T \mathcal{P}^T \mathcal{P}M + M^T G^T\mathcal{P}^T \mathcal{P}GM
+		\end{bmatrix}
+		\right\| \\
+		&\le  
+		\left \|
+			M^T \mathcal{P}^T \mathcal{P}M 
+		\right\|
+		+
+		\left \|
+			M^T G^T\mathcal{P}^T \mathcal{P}GM 
+		\right\|
+	\end{aligned}
+\end{equation*}
+
+
+\end{document}

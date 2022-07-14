@@ -1,0 +1,147 @@
+%\documentclass[journal]{IEEEtran}
+%\documentclass[12pt,onecolumn]{IEEEtran}
+\documentclass[UTF8]{article}
+\usepackage{ctex}
+\usepackage{geometry,graphicx,marvosym}
+\usepackage{amsmath,amsthm}
+\usepackage{amsfonts}
+\usepackage[usenames,dvipsnames]{pstricks}
+\usepackage{pst-plot,pstricks-add}
+%\usepackage{graphicx,times,amsmath,amssymb,multirow,subfigure}
+\usepackage{graphicx,times,amsmath,amssymb,multirow}
+\usepackage{url}
+\usepackage{stfloats}
+\usepackage{amsfonts,rotating}
+\usepackage{color}
+\usepackage{verbatim,multirow}
+% setting dimension of the paper
+\textwidth 7.0true in
+\textheight 8.9 true in
+\topmargin=-20pt
+\headheight=6pt
+\headsep=2pt
+\oddsidemargin -0.3true in
+\evensidemargin -0.4true in
+\usepackage{amssymb}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+
+\newcommand{\dtcwt}{\operatorname{DT-\mathbb{C}WT}}
+\newcommand{\tpctf}{\operatorname{TP-\mathbb{C}TF}}
+\newcommand{\ctf}{\operatorname{\mathbb{C}TF}}
+\newcommand{\tr}[1]{\textcolor{red}{#1}}
+\newcommand{\tb}[1]{\textcolor{blue}{#1}}
+\newcommand{\mO}{{\mathcal{T}}}
+\newcommand{\C}{\mathbb{C}}    %complex number field
+\newcommand{\N}{\mathbb{N}}    %natural numbers
+\newcommand{\R}{\mathbb{R}}    %real number field
+\newcommand{\Z}{\mathbb{Z}}    %integers
+\newcommand{\imag}{\mathrm{i}} % imaginary unit
+\newcommand{\dR}{\mathbb{R}^d}
+\newcommand{\dT}{\mathbb{T}^d}
+\newcommand{\dZ}{\mathbb{Z}^d}
+\newcommand{\dlp}[1]{l_{#1}(\mathbb{Z}^d)}
+\newcommand{\td}{\boldsymbol{\delta}}  %Dirac/Kronicker sequence
+\newcommand{\bp}{\begin{proof}}
+	\newcommand{\ep}{\hfill  \end{proof} }
+\newcommand{\be}{ \begin{equation} }
+\newcommand{\ee}{ \end{equation} }
+\newcommand{\dLp}[1]{L_{#1}(\mathbb{R}^d)}
+\newcommand{\prm}{P}           %projection matrix
+\newcommand{\wh}{\widehat}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\bs}{\backslash}
+\newcommand{\ol}{\overline}
+\newcommand{\vk}{\mathsf{k}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tp}{\mathsf{T}}  %transpose
+\newcommand{\conj}{\overline}
+\newcommand{\supp}{\mathrm{supp}}
+\newcommand{\setsp}{\;:\;}     %set separator
+\newcommand{\sd}{\mathcal{S}}  %subdivision operator S
+\newcommand{\tz}{\mathcal{T}}  %transition operator T
+\newcommand{\wt}{\widetilde}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\er}{\eqref}
+\newcommand{\gep}{\varepsilon}
+\newcommand{\eps}{\epsilon}
+\newcommand{\gl}{\lambda}
+\newcommand{\gL}{\Lambda}
+\newcommand{\gd}{\delta}
+\newcommand{\DAS}{\mathrm{DAS}}
+\newcommand{\UDAS}{\mathrm{UDAS}}
+\newcommand{\DHF}{\mathrm{DHF}}
+
+\newtheorem{example}{Example}
+\bibliographystyle{unsrt}
+\newcommand{\xz}[1]{\textcolor{magenta}{\bf #1}}
+\usepackage[colorlinks,linkcolor=blue,anchorcolor=blue,citecolor=blue]{hyperref}
+\usepackage{indentfirst}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+
+\begin{document}
+\author{Henry}
+\title{基于校正观测模型的并行磁共振成像算法研究}
+\maketitle
+
+
+\section{SENSE}
+\par 并行磁共振成像数据由多线圈数据组成，第$j$个线圈的数据可以写为：
+\begin{equation}\label{eq:coil_equation}
+	g_l = PFS_lu + \eta
+\end{equation}
+其中， $u$表示待重建的图像, $\eta$ 为高斯白噪声, $F$ 表示离散傅里叶变换矩阵,  $P$为采样矩阵(对角线的元素为0或者为1，1表示采样)。 将$p$ 个线圈数据组成起来, 可以得到 ：
+\begin{equation}\label{eq:system_equation}
+	g = \mathcal{P}Mu + \eta
+\end{equation}
+其中,
+\begin{equation*}
+	g = \begin{bmatrix}
+		g_1 \\
+		\vdots \\
+		g_p
+	\end{bmatrix},
+   \mathcal{P} = \begin{bmatrix}
+	   	P & \quad&\quad \\
+	   	\quad& \ddots &\quad \\
+	   	\quad& \quad& P
+   \end{bmatrix},
+	M = \begin{bmatrix}
+		FS_1 \\
+		\vdots \\
+		FS_p
+	\end{bmatrix},
+	\eta =\begin{bmatrix}
+		\eta_1 \\
+		\vdots \\
+		\eta_p
+	\end{bmatrix}
+\end{equation*}
+\section{GRAPPA }
+\par GRAPPA利用校正核和已经获取的数据通过线性组合的方式估计得到未知数据, 假设使用$G$表示校正核，可以得到
+\begin{equation} \label{GRAPPA_equation}
+	\mathcal{P}GMu \approx g
+\end{equation}
+
+
+\section{校正观测模型}
+\par 根据 (\ref{eq:system_equation}) and (\ref{GRAPPA_equation}), 可以提出如下的优化模型：
+\begin{equation}\label{mod_double_reg}
+	\min_{u} \left\{\frac{1}{2}\|\mathcal{P}Mu-g\|_2^2+  \frac{\lambda}{2}\|\mathcal{P}GMu-g \|_2^2 + \Phi_{1 \Lambda}(B_{1h} u) + \Phi_{2 \Theta}(B_{2h}B_{1l} u) \right\} 
+\end{equation}
+其中$B_1$和$B_2$分别是DHF和DCT紧框架变换的矩阵形式。与$B_1$相对应的滤波器为$\{ \tau_0, \tau_1, \tau_2, \tau_3, \tau_4, \tau_5, \tau_6 \}$ , 使用$M_k, k= 0, \cdots, 6$ 表示滤波器$\tau_k$的与之对应的矩阵形式，则
+\begin{equation*}
+	B_{1l} = M_0 ,B_{1h} = \begin{bmatrix} M_{1}^{T}, \dots ,M_{6}^{T} \end{bmatrix}^T
+\end{equation*}
+
+\end{document}
