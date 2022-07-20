@@ -1,0 +1,16 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: pMRI_3DTF_DoubleModels_PD3O_v4.aux
+The style file: IEEEtran.bst
+I couldn't open database file pMRI.bib
+---line 20 of file pMRI_3DTF_DoubleModels_PD3O_v4.aux
+ : \bibdata{pMRI
+ :              }
+I'm skipping whatever remains of this command
+I found no database files---while reading file pMRI_3DTF_DoubleModels_PD3O_v4.aux
+Warning--I didn't find a database entry for "Li-Chan-Shen:SIAMIS:16"
+Warning--I didn't find a database entry for "Ye-Chen-Huang:IEEETMI:11"
+-- IEEEtran.bst version 1.13 (2008/09/30) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+
+Done.
+(There were 2 error messages)

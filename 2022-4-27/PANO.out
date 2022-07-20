@@ -1,0 +1,5 @@
+\BOOKMARK [1][-]{section.1}{Notation definition}{}% 1
+\BOOKMARK [1][-]{section.2}{Patch-based nonlocal operator\(PANO\)}{}% 2
+\BOOKMARK [1][-]{section.3}{MRI reconstruction model using PANO}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{PANO reconstruction model}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Structural texture similarity based on 2D tight framelet\(STSIM-2DTF\)}{section.3}% 5

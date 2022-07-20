@@ -1,0 +1,148 @@
+%\documentclass[journal]{IEEEtran}
+%\documentclass[12pt,onecolumn]{IEEEtran}
+\documentclass[UTF8]{article}
+\usepackage{ctex}
+\usepackage{geometry,graphicx,marvosym}
+\usepackage{amsmath,amsthm}
+\usepackage{amsfonts}
+\usepackage[usenames,dvipsnames]{pstricks}
+\usepackage{pst-plot,pstricks-add}
+%\usepackage{graphicx,times,amsmath,amssymb,multirow,subfigure}
+\usepackage{graphicx,times,amsmath,amssymb,multirow}
+\usepackage{url}
+\usepackage{stfloats}
+\usepackage{amsfonts,rotating}
+\usepackage{color}
+\usepackage{verbatim,multirow}
+% setting dimension of the paper
+\textwidth 7.0true in
+\textheight 8.9 true in
+\topmargin=-20pt
+\headheight=6pt
+\headsep=2pt
+\oddsidemargin -0.3true in
+\evensidemargin -0.4true in
+\usepackage{amssymb}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+
+\newcommand{\dtcwt}{\operatorname{DT-\mathbb{C}WT}}
+\newcommand{\tpctf}{\operatorname{TP-\mathbb{C}TF}}
+\newcommand{\ctf}{\operatorname{\mathbb{C}TF}}
+\newcommand{\tr}[1]{\textcolor{red}{#1}}
+\newcommand{\tb}[1]{\textcolor{blue}{#1}}
+\newcommand{\mO}{{\mathcal{T}}}
+\newcommand{\C}{\mathbb{C}}    %complex number field
+\newcommand{\N}{\mathbb{N}}    %natural numbers
+\newcommand{\R}{\mathbb{R}}    %real number field
+\newcommand{\Z}{\mathbb{Z}}    %integers
+\newcommand{\imag}{\mathrm{i}} % imaginary unit
+\newcommand{\dR}{\mathbb{R}^d}
+\newcommand{\dT}{\mathbb{T}^d}
+\newcommand{\dZ}{\mathbb{Z}^d}
+\newcommand{\dlp}[1]{l_{#1}(\mathbb{Z}^d)}
+\newcommand{\td}{\boldsymbol{\delta}}  %Dirac/Kronicker sequence
+\newcommand{\bp}{\begin{proof}}
+	\newcommand{\ep}{\hfill  \end{proof} }
+\newcommand{\be}{ \begin{equation} }
+	\newcommand{\ee}{ \end{equation} }
+\newcommand{\dLp}[1]{L_{#1}(\mathbb{R}^d)}
+\newcommand{\prm}{P}           %projection matrix
+\newcommand{\wh}{\widehat}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\bs}{\backslash}
+\newcommand{\ol}{\overline}
+\newcommand{\vk}{\mathsf{k}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tp}{\mathsf{T}}  %transpose
+\newcommand{\conj}{\overline}
+\newcommand{\supp}{\mathrm{supp}}
+\newcommand{\setsp}{\;:\;}     %set separator
+\newcommand{\sd}{\mathcal{S}}  %subdivision operator S
+\newcommand{\tz}{\mathcal{T}}  %transition operator T
+\newcommand{\wt}{\widetilde}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\er}{\eqref}
+\newcommand{\gep}{\varepsilon}
+\newcommand{\eps}{\epsilon}
+\newcommand{\gl}{\lambda}
+\newcommand{\gL}{\Lambda}
+\newcommand{\gd}{\delta}
+\newcommand{\DAS}{\mathrm{DAS}}
+\newcommand{\UDAS}{\mathrm{UDAS}}
+\newcommand{\DHF}{\mathrm{DHF}}
+\newcommand{\bm}{\boldmath}
+\newtheorem{example}{Example}
+\bibliographystyle{unsrt}
+\newcommand{\xz}[1]{\textcolor{magenta}{\bf #1}}
+\usepackage[colorlinks,linkcolor=blue,anchorcolor=blue,citecolor=blue]{hyperref}
+\usepackage{indentfirst}
+\boldmath
+\begin{document}
+\title{Report : Reconstruction Algorithm Based on 3D Patch}
+\maketitle
+
+\section{Notation definition}
+\begin{enumerate}
+\item  $x\in \mathbb{C}^n$ : the vecter form of the desired MRI image.
+\item  $P_i$ : the patch decompositon operator.
+\item  $b_i \in \mathbb{C}^{L\times L}$ : the $i$ th patch can be expressed as  $b_i=P_i x$
+\item  $v_j=\{i_1, i_2, \dots ,i_Q\}$ : stores the index of patches.
+\item  $R_{v_j}$ : the grouping operator.
+\item  $R_{v_j}b_i$ : the $v_j$ group of the image patches.
+\item  $W_{3D}$ : the 3D Tight framlet transfrom.
+\end{enumerate}
+
+
+\section{Patch-based nonlocal operator(PANO)}
+\par The nonlocal operator  $A_j$ is given by (\ref{PANO})
+\begin{equation}\label{PANO}
+	A_j=W_{3D}R_{v_j}P_i
+\end{equation}
+If we perform $A_jx$, this operator is mainly divided into three steps:
+
+\begin{enumerate}
+	\item A patch $b_i \in \mathbb{C}^{L \times L}$ can be get from $P_i x$.
+	\item A similar patches of one group can be obtained by $R_{v_j}P_i x$.
+	\item A 3D tight framelet transform is perfromed on the group $R_{v_j}P_i x$.
+\end{enumerate} 
+The adjoint operator of $A_j$ is $A_j^T=P_i^TR_{v_j}^TW_{3D}^T$, it satisfies
+
+\begin{align*}
+	\sum_{j}^{J}A_j^TA_j &= \sum_{j}^{J} P_i^TR_{v_j}^TW_{3D}^TW_{3D}R_{v_j}P_i \\
+						 &= \sum_{j}^{J} P_i^TR_{v_j}^TR_{v_j}P_i \\
+						 & = diag\{o_1, o_2, \cdots, o_n, \cdots, o_N\} \\
+						 & = O
+\end{align*}
+where $o_i$ is a counter indicating the times that the ith pixel is grouped into 3D patch arrays. Therefor the $\sum_{j}^{J}A_j^TA_j = O$, where $O$ is a diagonal matrix with the ith diagonal element is $o_i$. The invertibility of $O$ requires that each pixel must be contained in at least one group. The PANO coefficients $\alpha_j$ is given by
+\begin{equation}
+	\alpha_j = A_j x
+\end{equation}
+and the image  can be estimated from PANO coefficients by
+\begin{equation}
+	\hat{x} = O^{-1} \sum_j^J A_j^T \alpha_j
+\end{equation}
+
+\section{MRI reconstruction model using PANO}
+\subsection{PANO reconstruction model}
+Based on the 3D tight framelet, we can propose a MRI reconstruction model using PANO by solving the following problem
+\begin{equation} \label{PANOModel}
+	\hat{x}=arg \underset{x}{min} \left\lbrace  \frac{1}{2} \Vert PFS x-y \Vert_2^2 +\sum_{j}^{J} \lambda_j \Vert A_j x\Vert_1  + \Vert \Gamma W_{3D}F^{-1}(\tilde{P}FSx+y) \Vert_1 \right\rbrace 
+\end{equation}
+where $y$ denotes the measured k-space data, $F$ denotes the  Fourier transform, $\lambda_j$ is a positive regularization parameter, $\tilde{P} = I - P$, $\Gamma $ is diagonal matrix with the postive diagonal elements.
+
+\subsection{Structural texture similarity based on 2D tight framelet(STSIM-2DTF)}
+\par  The conventional method for obtaining similar patches is to calculate the $l_2$-norm between the reference patch and candidate patches. $Q-1$ candidates with the smallest distance are selected as similar patches, which called the patch match. In this paper, we use another method to measure the distance between the patches, called the  Structural Texture Similarity based on 2D Tight Framelet(STSIM-2DTF).
+
+
+
+
+
+\end{document}

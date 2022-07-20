@@ -1,0 +1,205 @@
+%\documentclass[journal]{IEEEtran}
+%\documentclass[12pt,onecolumn]{IEEEtran}
+%\documentclass[11pt]{article}
+%\usepackage[margin=1in]{geometry}
+\documentclass[preprint]{elsarticle}
+%\usepackage{booktabs,dcolumn}
+\usepackage{geometry,graphicx,marvosym}
+\usepackage{amsmath,amsthm}
+\usepackage{amsfonts}
+\usepackage[usenames,dvipsnames]{pstricks}
+\usepackage{pst-plot,pstricks-add}
+%\usepackage{graphicx,times,amsmath,amssymb,multirow,subfigure}
+\usepackage{graphicx,times,amsmath,amssymb,multirow}
+\usepackage{url}
+\usepackage{stfloats}
+\usepackage{amsfonts,rotating}
+\usepackage{color}
+\usepackage{verbatim,multirow}
+
+
+\newcommand{\vertiii}[1]{{\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert #1
+		\right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}}
+
+%\usepackage{tikz}
+%\usetikzlibrary{graphs,graphs.standard}
+%\usetikzlibrary{shapes,chains,scopes,arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri}
+
+
+% setting dimension of the paper
+\textwidth 7.0true in
+\textheight 8.9 true in
+\topmargin=-20pt
+\headheight=6pt
+\headsep=2pt
+\oddsidemargin -0.3true in
+\evensidemargin -0.4true in
+
+
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+
+\newcommand{\dtcwt}{\operatorname{DT-\mathbb{C}WT}}
+\newcommand{\tpctf}{\operatorname{TP-\mathbb{C}TF}}
+\newcommand{\ctf}{\operatorname{\mathbb{C}TF}}
+
+
+\newcommand{\tr}[1]{\textcolor{red}{#1}}
+\newcommand{\tb}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\mO}{{\mathcal{T}}}
+\newcommand{\C}{\mathbb{C}}    %complex number field
+\newcommand{\N}{\mathbb{N}}    %natural numbers
+\newcommand{\R}{\mathbb{R}}    %real number field
+\newcommand{\Z}{\mathbb{Z}}    %integers
+\newcommand{\imag}{\mathrm{i}} % imaginary unit
+
+\newcommand{\dR}{\mathbb{R}^d}
+\newcommand{\dT}{\mathbb{T}^d}
+\newcommand{\dZ}{\mathbb{Z}^d}
+\newcommand{\dlp}[1]{l_{#1}(\mathbb{Z}^d)}
+\newcommand{\td}{\boldsymbol{\delta}}  %Dirac/Kronicker sequence
+\newcommand{\bp}{\begin{proof}}
+	\newcommand{\ep}{\hfill  \end{proof} }
+\newcommand{\be}{ \begin{equation} }
+	\newcommand{\ee}{ \end{equation} }
+\newcommand{\dLp}[1]{L_{#1}(\mathbb{R}^d)}
+\newcommand{\prm}{P}           %projection matrix
+\newcommand{\wh}{\widehat}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\bs}{\backslash}
+\newcommand{\ol}{\overline}
+\newcommand{\vk}{\mathsf{k}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tp}{\mathsf{T}}  %transpose
+\newcommand{\conj}{\overline}
+\newcommand{\supp}{\mathrm{supp}}
+\newcommand{\setsp}{\;:\;}     %set separator
+\newcommand{\sd}{\mathcal{S}}  %subdivision operator S
+\newcommand{\tz}{\mathcal{T}}  %transition operator T
+
+\newcommand{\wt}{\widetilde}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\er}{\eqref}
+
+\newcommand{\gep}{\varepsilon}
+\newcommand{\eps}{\epsilon}
+\newcommand{\gl}{\lambda}
+\newcommand{\gL}{\Lambda}
+\newcommand{\gd}{\delta}
+\newcommand{\DAS}{\mathrm{DAS}}
+\newcommand{\UDAS}{\mathrm{UDAS}}
+\newcommand{\DHF}{\mathrm{DHF}}
+%\newtheorem{lemma}{Lemma}
+%\newtheorem{theorem}[lemma]{Theorem}
+\newtheorem{example}{Example}
+
+%\renewcommand{\theequation}{\thesection.\arabic{equation}}
+%\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+%\renewcommand{\thetable}{\thesection.\arabic{table}}
+
+%\numberwithin{equation}{section}
+%\numberwithin{lemma}{section}
+%\numberwithin{figure}{section}
+%\numberwithin{example}{section}
+
+%\bibliographystyle{elsarticle-num}
+
+
+
+
+\newcommand{\xz}[1]{\textcolor{magenta}{\bf #1}}
+\begin{document}
+	\section{Reconstruction model} 
+	The $\ell$-th  coil $k$-space data $g_\ell$  is modeled as follows:
+	\begin{equation*}\label{eq:SENSE-ObsModel}
+		g_\ell = \mathcal{P}\mathcal{F}\mathcal{S}_\ell u + \eta_\ell,\: \ell =1,\cdots, p,
+	\end{equation*}
+	where $\eta_\ell$ is the additive noise, $\mathcal{S}_\ell$ the diagonal sensitivity matrix, $\mathcal{F}$ is the discrete Fourier transform matrix  and
+	$\mathcal{P}$, called sampling matrix,  is a diagonal matrix with $0$ and $1$, $u$ is target slice image.
+	\tr{In real application, the sensitivity $\mathcal{S}_\ell$  and target image $u$ are unknown variables. We adopt an alternative scheme to solve problem, and need to fix one and then solve another.}
+	
+	\subsection{Update image $u$} When the sensitivity $\mathcal{\hat{S}}_{\ell}$ is given, we want to solve the target image $u$.
+	We combine all the coil data $g_{\ell}$ and have a compact formula:
+	\begin{center}\label{eq:SENSE-ObsModel_Toget}
+		$g=Q_{p}Mu+\eta$,
+		\par\end{center}
+	where $g$ is the stacked $k$-space data, $M$ is the composition of
+	$\mathcal{F}$ and $\mathcal{S}_{\ell}$, and $Q_{p}$ is the concatenation of $ \mathcal{P}$:
+	%\begin{center}
+	$$ g:=\left[\begin{array}{c}
+		g_{1}\\
+		\vdots\\
+		g_{p}
+	\end{array}\right],\mathcal{F}_p:=\left[
+	\begin{array}{ccc}
+		\mathcal{F} & \: & \: \\
+		\: & \ddots & \: \\
+		\: & \:  & \mathcal{F} \\
+	\end{array}
+	\right], M=\mathcal{F}_p\left[\begin{array}{c}
+		\mathcal{\hat{S}}_{1}\\
+		\vdots\\
+		\mathcal{\hat{S}}_{p}
+	\end{array}\right],Q_{p}=\left[\begin{array}{ccc}
+		\mathcal{P} &  & \\
+		& \ddots & \\
+		& \ &  \mathcal{P}
+	\end{array}\right],\eta=\left[\begin{array}{c}
+		\eta_{1}\\
+		\vdots\\
+		\eta_{p}
+	\end{array}\right]$$
+	The proposed optimization model by  tight framelet regularization  for SENSE-based MRI reconstruction is:
+	\begin{equation}\label{mod:SENSE-ObsModel_3DReg}
+		\hat{u}=\arg\min_{u}\left\{ \frac{1}{2}\| Q_{p}Mu-g \|_{2}^{2}+\| \Gamma W \mathcal{F}_p^{-1}(Q_{o}Mu+g)\| _{1}\right\}
+	\end{equation}
+	Where $Q_{o}= I-Q_{p}$ is the sampling matrix at the missing positions,  $\Gamma$ is a diagonal matrix with non-negative diagonal elements and the $W$ is a transformation matrix by 3-dimension and 2-dimension tight framelet system. 
+	\par Let $x$ be a multi coil image of size $m \times n \times c$ in $\mathcal{C}^{m \times n \times c}$, therefore the  tight frame transform using the filters for $u \in \mathcal{C}^{m \times n \times c}$ is given by
+	
+	
+	\begin{equation*}
+		Wx = \begin{bmatrix}
+			W_{3D, l}\circledast x & W_{3D, x}\circledast x & W_{3D, y}\circledast x & W_{2D}W_{3D, z}\circledast x & W_{3D, xy}\circledast x
+		\end{bmatrix}^T
+	\end{equation*}
+	where the $W_{3D, l}$ denotes the lowpass filter of the 3-D transformation, $W_{2D}$ is the 2-D transformer matrix, while others represent the highpass filter at different directions of the 3-D transformation.
+	
+	\section{Algorithm}
+	Let $K\doteq Q_{p}M$, $A\doteq W\mathcal{F}_p^{-1}Q_{o}M$ and $b \doteq W\mathcal{F}_p^{-1} g$,
+	and identify the functions $f$, and $p$ as follows:
+	\begin{equation}\label{identify3function:1}
+		f(u)=\frac{1}{2}\|Ku-g\|^2, \quad p(s)=\| \Gamma (s+b)\| _{1}
+	\end{equation}
+	Our optimization model \eqref{mod:SENSE-ObsModel_3DReg} is written into
+	the 
+	\begin{equation}\label{identify3function:2}
+		\min_{u}\left\{ \frac{1}{2}\| Ku-g \|_{2}^{2}+ p(Au)\right\}. 
+	\end{equation}
+	 
+	The  PD3O algorithm is provided as:
+	\begin{subequations}
+		\begin{align*}
+			s^{k+1}&=\mathrm{prox}_{\delta p^*}\left((I-\gamma\delta AA^\top)s^k+\delta A(u^k-\gamma \nabla f(u^k))\right)\\
+			       &=\mathrm{prox}_{\delta p^*}\left( s^k - A  (\delta \gamma A^Ts^k - \delta(u^k-\gamma \nabla f(u^k)) \right) \\
+			u^{k+1}&=u^k-\gamma \nabla f(u^k)-\gamma A^\top s^{k+1}
+		\end{align*}
+	\end{subequations}
+	In the model \eqref{identify3function:2}, the operator $A\doteq W\mathcal{F}_p^{-1}Q_{o}M$, and its odjoint can be formulated as $A^T\doteq M^T Q_{o}^{T} \mathcal{F}_{p} W^T$, where $W^T$ denotes the adjoint matirx of the $W$. Assuming the $\omega$ obtained by the $Wx$, where $\omega$ is the tight frame coefficient of the multi coil image $x$ and satisfies the perfect reconstruction formula, i.e.,
+	
+	\begin{equation*}
+		 x = W^T W x = W^T \omega
+	\end{equation*}
+	\begin{eqnarray*}
+		W^T \omega = W_{3D, l}^{T}\circledast \omega_l + W_{3D, x}^{T}\circledast \omega_x + W_{3D, y}^{T}\circledast \omega_y + W_{3D, z}^{T} W_{2D}^{T}\circledast \omega_z+ W_{3D, xy}^{T} \circledast \omega_{xy}
+	\end{eqnarray*}
+	
+\end{document}

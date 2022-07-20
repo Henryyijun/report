@@ -1,0 +1,58 @@
+\begin{thebibliography}{1}
+
+\bibitem{breuer2005controlled}
+Felix~A Breuer, Martin Blaimer, Robin~M Heidemann, Matthias~F Mueller, Mark~A
+  Griswold, and Peter~M Jakob.
+\newblock Controlled aliasing in parallel imaging results in higher
+  acceleration (caipirinha) for multi-slice imaging.
+\newblock {\em Magnetic Resonance in Medicine: An Official Journal of the
+  International Society for Magnetic Resonance in Medicine}, 53(3):684--691,
+  2005.
+
+\bibitem{larkman2001use}
+David~J Larkman, Joseph~V Hajnal, Amy~H Herlihy, Glyn~A Coutts, Ian~R Young,
+  and G{\"o}sta Ehnholm.
+\newblock Use of multicoil arrays for separation of signal from multiple slices
+  simultaneously excited.
+\newblock {\em Journal of Magnetic Resonance Imaging: An Official Journal of
+  the International Society for Magnetic Resonance in Medicine},
+  13(2):313--317, 2001.
+
+\bibitem{blaimer2006accelerated}
+Martin Blaimer, Felix~A Breuer, Nicole Seiberlich, Matthias~F Mueller, Robin~M
+  Heidemann, Vladimir Jellus, Graham Wiggins, Lawrence~L Wald, Mark~A Griswold,
+  and Peter~M Jakob.
+\newblock Accelerated volumetric mri with a sense/grappa combination.
+\newblock {\em Journal of Magnetic Resonance Imaging: An Official Journal of
+  the International Society for Magnetic Resonance in Medicine},
+  24(2):444--450, 2006.
+
+\bibitem{setsompop2012blipped}
+Kawin Setsompop, Borjan~A Gagoski, Jonathan~R Polimeni, Thomas Witzel, Van~J
+  Wedeen, and Lawrence~L Wald.
+\newblock Blipped-controlled aliasing in parallel imaging for simultaneous
+  multislice echo planar imaging with reduced g-factor penalty.
+\newblock {\em Magnetic resonance in medicine}, 67(5):1210--1224, 2012.
+
+\bibitem{cauley2014interslice}
+Stephen~F Cauley, Jonathan~R Polimeni, Himanshu Bhat, Lawrence~L Wald, and
+  Kawin Setsompop.
+\newblock Interslice leakage artifact reduction technique for simultaneous
+  multislice acquisitions.
+\newblock {\em Magnetic resonance in medicine}, 72(1):93--102, 2014.
+
+\bibitem{hashemizadehkolowri2020coil}
+SK~HashemizadehKolowri, Rong-Rong Chen, Ganesh Adluru, Leslie Ying, and
+  Edward~VR DiBella.
+\newblock Coil-combined split slice-grappa for simultaneous multi-slice
+  diffusion mri.
+\newblock {\em Magnetic Resonance Imaging}, 66:9--21, 2020.
+
+\bibitem{hashemizadehkolowri2021simultaneous}
+SK~HashemizadehKolowri, Rong-Rong Chen, Ganesh Adluru, Douglas~C Dean,
+  Elisabeth~A Wilde, Andrew~L Alexander, and Edward~VR DiBella.
+\newblock Simultaneous multi-slice image reconstruction using regularized image
+  domain split slice-grappa for diffusion mri.
+\newblock {\em Medical Image Analysis}, 70:102000, 2021.
+
+\end{thebibliography}

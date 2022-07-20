@@ -1,0 +1,627 @@
+%\documentclass[journal]{IEEEtran}
+%\documentclass[12pt,onecolumn]{IEEEtran}
+%\documentclass[11pt]{article}
+%\usepackage[margin=1in]{geometry}
+\documentclass[preprint]{elsarticle}
+%\usepackage{booktabs,dcolumn}
+\usepackage{geometry,graphicx,marvosym}
+\usepackage{amsmath,amsthm}
+\usepackage{amsfonts}
+\usepackage[usenames,dvipsnames]{pstricks}
+\usepackage{pst-plot,pstricks-add}
+%\usepackage{graphicx,times,amsmath,amssymb,multirow,subfigure}
+\usepackage{graphicx,times,amsmath,amssymb,multirow}
+\usepackage{url}
+\usepackage{stfloats}
+\usepackage{amsfonts,rotating}
+\usepackage{color}
+\usepackage{verbatim,multirow}
+
+
+\newcommand{\vertiii}[1]{{\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert #1
+    \right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}}
+
+%\usepackage{tikz}
+%\usetikzlibrary{graphs,graphs.standard}
+%\usetikzlibrary{shapes,chains,scopes,arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri}
+
+
+% setting dimension of the paper
+\textwidth 7.0true in
+\textheight 8.9 true in
+\topmargin=-20pt
+\headheight=6pt
+\headsep=2pt
+\oddsidemargin -0.3true in
+\evensidemargin -0.4true in
+
+
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+
+\newcommand{\dtcwt}{\operatorname{DT-\mathbb{C}WT}}
+\newcommand{\tpctf}{\operatorname{TP-\mathbb{C}TF}}
+\newcommand{\ctf}{\operatorname{\mathbb{C}TF}}
+
+
+\newcommand{\tr}[1]{\textcolor{red}{#1}}
+\newcommand{\tb}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\mO}{{\mathcal{T}}}
+\newcommand{\C}{\mathbb{C}}    %complex number field
+\newcommand{\N}{\mathbb{N}}    %natural numbers
+\newcommand{\R}{\mathbb{R}}    %real number field
+\newcommand{\Z}{\mathbb{Z}}    %integers
+\newcommand{\imag}{\mathrm{i}} % imaginary unit
+
+\newcommand{\dR}{\mathbb{R}^d}
+\newcommand{\dT}{\mathbb{T}^d}
+\newcommand{\dZ}{\mathbb{Z}^d}
+\newcommand{\dlp}[1]{l_{#1}(\mathbb{Z}^d)}
+\newcommand{\td}{\boldsymbol{\delta}}  %Dirac/Kronicker sequence
+\newcommand{\bp}{\begin{proof}}
+\newcommand{\ep}{\hfill  \end{proof} }
+\newcommand{\be}{ \begin{equation} }
+\newcommand{\ee}{ \end{equation} }
+\newcommand{\dLp}[1]{L_{#1}(\mathbb{R}^d)}
+\newcommand{\prm}{P}           %projection matrix
+\newcommand{\wh}{\widehat}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\bs}{\backslash}
+\newcommand{\ol}{\overline}
+\newcommand{\vk}{\mathsf{k}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\tp}{\mathsf{T}}  %transpose
+\newcommand{\conj}{\overline}
+\newcommand{\supp}{\mathrm{supp}}
+\newcommand{\setsp}{\;:\;}     %set separator
+\newcommand{\sd}{\mathcal{S}}  %subdivision operator S
+\newcommand{\tz}{\mathcal{T}}  %transition operator T
+
+\newcommand{\wt}{\widetilde}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\er}{\eqref}
+
+\newcommand{\gep}{\varepsilon}
+\newcommand{\eps}{\epsilon}
+\newcommand{\gl}{\lambda}
+\newcommand{\gL}{\Lambda}
+\newcommand{\gd}{\delta}
+\newcommand{\DAS}{\mathrm{DAS}}
+\newcommand{\UDAS}{\mathrm{UDAS}}
+\newcommand{\DHF}{\mathrm{DHF}}
+%\newtheorem{lemma}{Lemma}
+%\newtheorem{theorem}[lemma]{Theorem}
+\newtheorem{example}{Example}
+
+%\renewcommand{\theequation}{\thesection.\arabic{equation}}
+%\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+%\renewcommand{\thetable}{\thesection.\arabic{table}}
+
+%\numberwithin{equation}{section}
+%\numberwithin{lemma}{section}
+%\numberwithin{figure}{section}
+%\numberwithin{example}{section}
+
+%\bibliographystyle{elsarticle-num}
+
+
+
+
+\newcommand{\xz}[1]{\textcolor{magenta}{\bf #1}}
+
+
+\begin{document}
+
+
+\begin{frontmatter}
+
+\title{SENSE-based pMRI Reconstruction by Double Optimization Models Using 3D Tight Frame Regularization}
+
+%\title{Parallel Magnetic Resonance Imaging Reconstruction Algorithm by 3-Dimension Directional Haar Tight Framelets Regularization}
+
+%\tnoteref{tidate}
+%\tnotetext[tidate]{\today}
+
+%\author[addressShenZhenU]{Yan-Ran Li}
+%\ead{lyran@szu.edu.cn}
+%%\author[addressUNSW]{Robert S. Womersley}
+%%\ead{r.womersley@unsw.edu.au}
+%\author[addressCityU]{Xiaosheng Zhuang\corref{corau}}
+%\ead{xzhuang7@cityu.edu.hk}
+%
+%%\address[addressCNU]{School of Mathematical Sciences, Capital Normal University, Beijing 100048, China.}
+%\address[addressShenZhenU]{College of Computer Science and Software Engineering, Shenzhen University, Shenzhen, 518060, P. R. China.}
+%\address[addressCityU]{Department of Mathematics, City University of Hong Kong, Tat Chee Avenue, Kowloon Tong, Hong Kong}
+%
+%\cortext[corau]{Corresponding authors.}
+
+%\fntext[fn0]{The research  of Y.-R. Li and the work described in this paper was partially supported by xxx}
+
+%\fntext[fn1]{The research  of X. Zhuang  and the work described in this paper was partially supported by a grant from the Research Grants Council of the Hong Kong Special Administrative Region, China (Project No.  CityU xxx)}
+
+\begin{abstract}
+The sensitivity encoding (SENSE) method is one of the  multi-coil  parallel magnetic resonance imaging (pMRI) reconstruction methods  and is widely utilized in commercial application on
+clinical imaging  for disease detection.
+Each coil image in pMRI system  is an imaging slice modulated by corresponding coil sensitivity and similar with each other, which can be combined together as 3-dimension image data and be regularized by 3-dimension framelet.
+We propose SENSE-based double optimization models by 3-dimension framelet regularization together to reconstruct  high quality images from sampled k-space data with high acceleration rate and   reduce aliasing artifacts due to inaccurate estimation of each coil sensitivity.
+One optimization  model for an imaging slice is regularized by the sparsity of  its 3-dimension framelet coefficients of multi coil images and can be solved by ADMM method;  and the other model  for sensitivity estimation  is regularized by the 3-dimension features of multi-coil sensitivities with a constrain of the normalization of all sensitivities, which is efficiently solved by the FISTA algorithm.
+Experiments on real phantoms  and in-vivo data  show that our double optimization models can be efficient to reconstruct high quality images  and reduce aliasing artifacts.
+\end{abstract}
+\begin{keyword}
+pMRI, Directional Haar tight framelets, 3-Dimension framelet regularization, SENSE, GRAPPA, , ADMM.
+\MSC[2010]{42C15, 42C40, 42B05, 41A55, 57N99, 58C35, 94A12, 94C15, 93C55, 93C95}
+\end{keyword}
+
+\end{frontmatter}
+
+
+%\tableofcontents
+\section{Introduction}
+We emphasize two points: coil images are correlated and can be considered as 3-D image data and regularized together; Sensitivity is not easily to be estimated accurately, when the reconstruction image is more and more close to the imaging slice, then it can update the sensitivity  by an optimization model; and updated sensitivity will reconstruct a better target image.
+
+
+ $\vertiii{A}$
+
+
+The outline of the paper is as follows.
+\section{SENSE-based pMRI Model}
+
+2-Dimensional Haar Framelet \cite{Li-Chan-Shen:SIAMIS:16} \cite{Ye-Chen-Huang:IEEETMI:11}
+\begin{equation}\label{mod:SENSE-ObsModel_2DReg}
+\hat{u}=\arg\min_{u}\left\{ \frac{1}{2}\| Q_{p}Mu-g \|_{2}^{2}+\| \Gamma W_{2D}u\| _{1}\right\}
+\end{equation}
+
+\section{3-Dimension Tight Frame}
+
+\section{Double Optimization Models for SENSE Reconstruction  by 3-Dimension regularization}
+
+
+\section{pMRI Algorithm for Double Models}
+
+The $\ell$-th  coil $k$-space data $g_\ell$  is modeled as follows:
+\begin{equation*}\label{eq:SENSE-ObsModel}
+       g_\ell = \mathcal{P}\mathcal{F}\mathcal{S}_\ell u + \eta_\ell,\: \ell =1,\cdots, p,
+\end{equation*}
+where $\eta_\ell$ is the additive noise, $\mathcal{S}_\ell$ the diagonal sensitivity matrix, $\mathcal{F}$ is the discrete Fourier transform matrix  and
+$\mathcal{P}$, called sampling matrix,  is a diagonal matrix with $0$ and $1$, $u$ is target slice image.
+\tr{In real application, the sensitivity $\mathcal{S}_\ell$  and target image $u$ are unknown variables. We adopt an alternative scheme to solve problem, and need to fix one and then solve another.}
+
+
+\subsection{Update image $u$} When the sensitivity $\mathcal{\hat{S}}_{\ell}$ is given, we want to solve the target image $u$.
+We combine all the coil data $g_{\ell}$ and have a compact formula:
+\begin{center}\label{eq:SENSE-ObsModel_Toget}
+$g=Q_{p}Mu+\eta$,
+\par\end{center}
+where $g$ is the stacked $k$-space data, $M$ is the composition of
+$\mathcal{F}$ and $\mathcal{S}_{\ell}$, and $Q_{p}$ is the concatenation of $ \mathcal{P}$:
+%\begin{center}
+$$ g:=\left[\begin{array}{c}
+g_{1}\\
+\vdots\\
+g_{p}
+\end{array}\right],\mathcal{F}_p:=\left[
+  \begin{array}{ccc}
+    \mathcal{F} & \: & \: \\
+    \: & \ddots & \: \\
+    \: & \:  & \mathcal{F} \\
+  \end{array}
+\right], M=\mathcal{F}_p\left[\begin{array}{c}
+\mathcal{\hat{S}}_{1}\\
+\vdots\\
+\mathcal{\hat{S}}_{p}
+\end{array}\right],Q_{p}=\left[\begin{array}{ccc}
+ \mathcal{P} &  & \\
+ & \ddots & \\
+ & \ &  \mathcal{P}
+\end{array}\right],\eta=\left[\begin{array}{c}
+\eta_{1}\\
+\vdots\\
+\eta_{p}
+\end{array}\right]$$
+The proposed optimization model by  3-Dimension tight framelet regularization  for SENSE-based MRI reconstruction is:
+\begin{equation}\label{mod:SENSE-ObsModel_3DReg}
+\hat{u}=\arg\min_{u}\left\{ \frac{1}{2}\| Q_{p}Mu-g \|_{2}^{2}+\| \Gamma W_{3D}\mathcal{F}_p^{-1}(Q_{o}Mu+g)\| _{1}\right\}
+\end{equation}
+Where $Q_{o}= I-Q_{p}$ is the sampling matrix at the missing positions,  $\Gamma$ is a diagonal matrix with non-negative diagonal elements and the $W_{3D}$ is a transformer matrix by 3-dimension tight framelet system.
+
+
+\subsection{Primal-Dual Three-Operator splitting (PD3O)-based Algorithm }
+
+Let $K\doteq Q_{p}M$, $A\doteq W_{3D}\mathcal{F}_p^{-1}Q_{o}M$ and $b \doteq W_{3D}\mathcal{F}_p^{-1} g$,
+and identify the functions $f$, and $p$ as follows:
+\begin{equation}\label{identify3function:1}
+f(u)=\frac{1}{2}\|Ku-g\|^2, \quad p(s)=\| \Gamma (s+b)\| _{1}
+\end{equation}
+Our optimization model \eqref{mod:SENSE-ObsModel_3DReg} is written into
+the $$ \min_{u}\left\{ \frac{1}{2}\| Ku-g \|_{2}^{2}+ p(Au)\right\}. $$
+The  PD3O algorithm is provided as:
+\begin{subequations}
+    \begin{align*}
+    s^{k+1}&=\mathrm{prox}_{\delta p^*}\left((I-\gamma\delta AA^\top)s^k+\delta A(u^k-\gamma \nabla f(u^k))\right)\\
+    u^{k+1}&=u^k-\gamma \nabla f(u^k)-\gamma A^\top s^{k+1}
+    \end{align*}
+\end{subequations}
+
+
+
+To compute $p^*$ and its proximity operator, due to the separability of the $\ell_1$ norm, let us consider the one-dimensional case of the function $p(s)=\| \Gamma (s+b)\| _{1}$, that is, $p(s)=\lambda|s+b|$, where $\lambda \ge 0$.
+
+\begin{lemma}
+Let $p(s)=\lambda|s+b|$, where $\lambda \ge 0$, $s \in \mathbb{R}$. Then
+$$
+p^*(t)=\left\{
+         \begin{array}{ll}
+           \iota_{\{0\}}(t), & \hbox{if $\lambda=0$;} \\
+           -\langle b, t\rangle +\iota_{[-\lambda, \lambda]}(t), & \hbox{if $\lambda>0$.}
+         \end{array}
+       \right.
+$$
+\end{lemma}
+\begin{proof}\ \ First, consider $\lambda=0$. Then $p(s)=0$ for all $s \in \mathbb{R}$. Therefore,
+$$
+p^*(t)=\sup_{s\in \mathbb{R}} \langle s, t\rangle - p(s) = \sup_{s\in \mathbb{R}} \langle s, t\rangle = \iota_{\{0\}}(t).
+$$
+
+Next, consider $\lambda>0$.
+\begin{eqnarray*}
+p^*(t)&=&\sup_{s\in \mathbb{R}} \left( \langle s, t\rangle - p(s)\right)\\
+&=&\sup_{s\in \mathbb{R}}  \left( \langle s, t\rangle - \lambda|s+b|\right) \\
+&=&\sup_{\widetilde{s}\in \mathbb{R}} \left(\langle \widetilde{s}-b, t\rangle - \lambda|\widetilde{s}|\right) \\
+&=&\langle -b, t\rangle + \sup_{\widetilde{s}\in \mathbb{R}} \left(\langle \widetilde{s}, t\rangle - \lambda|\widetilde{s}|\right) \\
+&=&\langle -b, t\rangle + \iota_{[-\lambda, \lambda]}(t)
+\end{eqnarray*}
+\end{proof}
+Actually, we can write
+$$
+p^*(t)=\left\{
+         \begin{array}{ll}
+           +\infty, & \hbox{if $t \notin [-\lambda, \lambda]$;} \\
+           -\langle b, t\rangle, & \hbox{if $t \in [-\lambda, \lambda]$.}
+         \end{array}
+       \right.
+$$
+
+Next, let compute the proximity of $p^*$ in one-dimensional case.
+\begin{lemma}
+Let $p(s)=\lambda|s+b|$, where $\lambda \ge 0$, $s \in \mathbb{R}$. Then
+$$
+\mathrm{prox}_{\delta p^*}(s)=\left\{
+         \begin{array}{ll}
+           \lambda, & \hbox{if $s+\delta b \ge \lambda$;} \\
+           s+\delta b, & \hbox{if $|s+\delta b| \le \lambda$;}\\
+           -\lambda, & \hbox{if $s+\delta b \le -\lambda$}
+         \end{array}
+       \right.
+$$
+\end{lemma}
+\begin{proof}\ \
+\begin{eqnarray*}
+\mathrm{prox}_{\delta p^*}(s)&=&\mathop{\mathrm{argmin}}_{t \in \mathbb{R}} \frac{1}{2}(t-s)^2 + \delta p^*(t) \\
+&=&\mathop{\mathrm{argmin}}_{t \in [-\lambda, \lambda]} \frac{1}{2}(t-s)^2  -\delta\langle b, t\rangle \\
+&=&\mathop{\mathrm{argmin}}_{t \in [-\lambda, \lambda]} \frac{1}{2}(t-(s+\delta b))^2\\
+&=&\left\{
+         \begin{array}{ll}
+           \lambda, & \hbox{if $s+\delta b \ge \lambda$;} \\
+           s+\delta b, & \hbox{if $|s+\delta b| \le \lambda$;}\\
+           -\lambda, & \hbox{if $s+\delta b \le -\lambda$}
+         \end{array}
+       \right.
+\end{eqnarray*}
+\end{proof}
+
+We can write $\mathrm{prox}_{\delta p^*}$ in the following form
+$$
+\mathrm{prox}_{\delta p^*}(s) = (s+\delta b)- \mathrm{soft}(s+\delta b, \lambda)
+$$
+
+\subsection{Update sensitivity $\mathcal{S}_{\ell}$}
+When the target image $\hat{u}$ is given, we want to update the sensitivity $\mathcal{S}_{\ell}$.
+The k-space of each coil can be approximated as $ g_{\ell} + (I- \mathcal{P}) \mathcal{F}\mathcal{\hat{\hat{S}}}_{\ell}\hat{u}$.
+Meanwhile the sensitivity of each coil is very smooth, then the Fourier coefficients of $\mathcal{S}_\ell$ tend to be zero when it is  far away from the k-space center.
+Thus, we only collect data of square window around the center of k-space to estimate the sensitivity as
+\begin{equation}\label{mod:SENSE-ObsModel_Sensitivity}
+ g_{\ell}^c = \mathcal{P}_c(g_{\ell} + (I- \mathcal{P}) \mathcal{F}\mathcal{\hat{S}}_{\ell}\hat{u}),
+\end{equation}
+where $\mathcal{P}_c$ is the diagonal matrix to collect data of square window around the center of k-space.
+Let $\mathcal{U} := diag(\hat{u})$ be the diagonal matrix form of the target image $\hat{u}$, and $s_{\ell}$ be the vector form of the $\ell$-th coil diagonal sensitivity matrix $\mathcal{S}_\ell$, we have
+\begin{equation*}
+\mathcal{S}_\ell \hat{u} = U s_{\ell}.
+\end{equation*}
+We combine all the coil data $g_{\ell}^c$ and have a compact formula:
+\begin{center}\label{eq:SENSE-ObsModel_Toget_Cent}
+$g_c=Q_{c}\mathcal{F}_p \mathcal{U}_p s +\eta$,
+\par\end{center}
+$$ g_c:=\left[\begin{array}{c}
+g_{1}^c\\
+\vdots\\
+g_{p}^c
+\end{array}\right],
+s:=\left[\begin{array}{c}
+s_{1}\\
+\vdots\\
+s_{p}
+\end{array}\right],
+\mathcal{U}_p:=\left[
+  \begin{array}{ccc}
+    \mathcal{U} & \: & \: \\
+    \: & \ddots & \: \\
+    \: & \:  & \mathcal{U} \\
+  \end{array}
+\right],Q_{c}=\left[\begin{array}{ccc}
+ \mathcal{P}_c &  & \\
+ & \ddots & \\
+ & \ &  \mathcal{P}_c
+\end{array}\right]$$
+
+We define a  concave set $$C:=\left\{s\in \mathcal{C}^{p \cdot\sharp u }:\sum_{\ell=1}^p \overline{s_{\ell}[k]}s_{\ell}[k] =1,\:k=1,\cdots,\sharp u \right\}$$
+and its indicator function is defined as
+$$
+\iota_C(s): =\left\{
+               \begin{array}{ll}
+                 0, & \hbox{if $s\in C$,} \\
+                 +\infty, & \hbox{otherwise.}
+               \end{array}
+             \right.
+$$
+
+\begin{equation}\label{eq:abs-envelope}
+\mathrm{env}_{a |\cdot|} (x)=\left\{
+                          \begin{array}{ll}
+                            a |x|-\frac{1}{2}a^2, & \hbox{if $|x| \ge a$;} \\
+                            \frac{1}{2}|x|^2, & \hbox{otherwise.}
+                          \end{array}
+                                                             \right.
+\end{equation}
+
+The optimization model for sensitivity by 3-Dimension tight framelet regularization is proposed as
+\begin{equation}\label{mod:Sensitivity_3DReg-1}
+ \hat{s} = \arg\min_{s}\left\{ \frac{1}{2}\| Q_{c}\mathcal{F}_p \mathcal{U}_p s - g_c \|_{2}^{2}+\mathrm{env}_{\alpha \|\cdot\|_1\circ \Gamma} ( W_{3D}s), S.T. \sum_{\ell=1}^p \overline{s_{\ell}[k]}s_{\ell}[k] =1,\:k=1,\cdots,\sharp u,  \right\}
+\end{equation}
+
+Set
+\begin{eqnarray*}
+h(s)&:=& \frac{1}{2}\| Q_{c}\mathcal{F}_p \mathcal{U}_p s - g_c \|_{2}^{2}+\mathrm{env}_{\|\cdot\|_1\circ \Gamma} ( W_{3D}s) \\
+\mathcal{C}&:=& \{s: \sum_{\ell=1}^p \overline{s_{\ell}[k]}s_{\ell}[k] =1,\:k=1,\cdots,\sharp u\}
+\end{eqnarray*}
+Then, model~\eqref{mod:Sensitivity_3DReg-1} can be rewritten as
+\begin{equation}\label{mod:Sensitivity_3DReg-2}
+\hat{s} = \arg\min_{s}\left\{ h(s)+\iota_\mathcal{C}(s) \right\}
+\end{equation}
+If $h$ has a gradient with constant $L$, then the forward and backward proximal by Attouch and Bolte is
+$$
+s^{k+1}=\mathrm{prox}_{\iota_\mathcal{C}}(s^k-\frac{1}{L} \nabla h(s^k)).
+$$
+
+
+
+
+The alternative scheme to solve problem is following as $\hat{u}_0$ , $\hat{s}_0$, $\hat{u}_1$, $\hat{s}_1$, $\cdots$.
+\begin{eqnarray*}
+%\begin{array}{l}
+  \hat{u}_k=\arg\min_{u}\left\{ \frac{1}{2}\| Q_{p}Mu-g \|_{2}^{2}+\| \Gamma W_{3D}\mathcal{F}_p^{-1}(Q_{q}Mu+g)\| _{1}\right\} \\
+  \hat{s}_k = \arg\min_{s}\left\{\frac{1}{2}\| Q_{c}\mathcal{F}_p \mathcal{U}_p s - g_c \|_{2}^{2}+\mathrm{env}_{\|\cdot\|_1\circ \Gamma} ( W_{3D}s)+\iota_\mathcal{C}(s) \right\}
+\end{eqnarray*}
+%
+%\newpage
+%\section{Experiments}
+%
+%In this subsection, phantom MR images are acquired on a 3T MRI System (Tim Trio, Siemens, Erlangen, Germany). A turbo spin-echo sequence was used to acquire $T_2$-weighted images.
+%The detailed imaging parameters are as follows:  field of view (FOV) = $256\times256$ mm$^2$, image marix size = $512\times512$, slice thicknesses (ST) = $3$ mm, flip angle = $180$ degree, repetition time (TR) = $4000$ ms, echo time (TE) = $71$ ms, echo train length (ETL) = $11$ and number of excitation (NEX) = $1$.
+%
+%The detailed imaging parameters are as follows:  field of view (FOV) = $256\times256$ mm$^2$, image marix size = $512\times512$, slice thicknesses (ST) = $3.5$ mm, flip angle = $180$ degree, repetition time (TR) = $4000$ ms, echo time (TE) = $94$ ms, echo train length (ETL) = $11$ and number of excitation (NEX) = $1$.
+%
+%
+%\begin{figure}[htbp]
+%\centering
+%\begin{tabular}{cc}
+%%\scalebox{0.25}{\includegraphics*[0,0][511,511]{./PIC/Sampling_model_CartesianMask512_SR_25_AC_23.eps}} &
+%\scalebox{0.25}{\includegraphics*[0,0][511,511]{./PIC/CartesianMask512_0_29_2_Uniform_ACS24_R4_3_4.eps}} &
+%\scalebox{0.25}{\includegraphics*[0,0][511,511]{./PIC/Sampling_model_CartesianMask512_SR_15_AC_24.eps}}\\
+%(a) & (b)
+%\end{tabular}
+%\caption{ Sampling models for $k$-space. (a) $29\%$ data by the uniform sampling mode (one line taken from every four lines)  with 24 ACS lines; (b) $15\%$  data with 24 ACS lines.}
+%\label{fig:sampling_model}
+%\end{figure}
+%
+%
+%
+%
+%
+%\subsection{Comparisons on 2-D vs 3-D regularization}
+%
+%In this section, we first compare performance by  2-Dimensional regularization model \eqref{mod:SENSE-ObsModel_2DReg} with Directional Haar Framelet DHF \cite{Li-Chan-Shen:SIAMIS:16}  and
+%the proposed 3-dimensional regularization model \eqref{mod:SENSE-ObsModel_3DReg}. This case of phantom images is with four coil images of size 512-by-512 here.
+%To simulate the acceleration of imaging speed, k-space data of each coil  is partially sampled to reconstruct a target imaging slice by pMRI algorithm.
+%According to the sampling model in Figure~\ref{fig:sampling_model} (a), $25\%$ of $k$-space with 23 ACS lines (marked by white color
+%there) of each coil are collected for shortening imaging time.
+%Figure~\ref{mod:Sensitivity_3DReg-1} (b) is four coil downsampled images obtained by applying the inverse Fourier transform for the collected $k$-space data
+%with zero-padding for missing data, and their SoS image in Figure~\ref{mod:Sensitivity_3DReg-1} (c) is obviously blurred with aliasing artifacts.
+%
+%\tr{Regularization parameters will be presented later: $\lambda_u $}
+%
+%The MRI images reconstructed from the observed coil images via 2-Dimensional regularization model \eqref{mod:SENSE-ObsModel_2DReg} and 3-Dimensional regularization \eqref{mod:SENSE-ObsModel_3DReg}
+%respectively, are shown in Figure~\ref{mod:Sensitivity_3DReg-1} (d) and (e).  The reconstruction optimization model by 3-dimensional regularization  is better to reduce the aliasing artifacts  than
+%the 2-Dimensional regularization model. That is to say, the correlated futures of coil images  by 3-D tight framelet can be efficient to suppress the affection by the downsamping operation in k-space domain.
+%We zoom-in the two parts of Figure~\ref{Fig:phantom_Rec} (d) and (e) and present them in  Figure~\ref{Fig:phantom_Rec_Zoomin} (c) and (d).
+%Figure~\ref{Fig:phantom_Rec_Zoomin} (c) by 2D regularization has some aliasing artifacts, but  they are reduced by the proposed 3D regularization reconstruction model. In  Figure~\ref{Fig:phantom_Rec_Zoomin} (d), aliasing artifacts at the side of 'Column'  is removed and  in the 'square' is reduced by regularizing  the correlated features.
+%
+%Sensitivity is not easily to be estimated accurately, but we utilize the reconstructed image by the optimization model \eqref{mod:SENSE-ObsModel_3DReg} to update  sensitivities
+%through  3D regularization model \eqref{mod:Sensitivity_3DReg-1}.
+%Figure~\ref{Fig:phantom_Rec} (f) is reconstructed  by  double optimization models \eqref{mod:SENSE-ObsModel_3DReg} and \eqref{mod:Sensitivity_3DReg-1},
+%which does not have aliasing artifacts appeared in Figure~\ref{Fig:phantom_Rec} (e) by only reconstructed model \eqref{mod:SENSE-ObsModel_3DReg}.
+%Zoom-in parts in Figure~\ref{Fig:phantom_Rec_Zoomin} (d) and (e) show that the the model \eqref{mod:SENSE-ObsModel_3DReg} can get more accurate sensitivity to  reconstruct  better target images.
+%Aliasing artifacts in the upper image in Figure~\ref{Fig:phantom_Rec_Zoomin} (d)  are removed by double optimization models in Figure~\ref{Fig:phantom_Rec_Zoomin} (e).
+%%The problem  in \eqref{mod:SENSE-ObsModel_3DReg} requires the availability of coil sensitivities.
+%%
+%%when the reconstruction image is more and more close to the imaging slice, then it can update the sensitivity  by an optimization model  \eqref{mod:Sensitivity_3DReg-1}; and updated sensitivity will reconstruct a better target image.
+%The performance by 3-dimensional reconstructed model \eqref{mod:SENSE-ObsModel_3DReg} is better than that by 2-Dimensional reconstructed model \eqref{mod:SENSE-ObsModel_2DReg}, and
+%the double optimization models \eqref{mod:SENSE-ObsModel_3DReg} and \eqref{mod:Sensitivity_3DReg-1} are  better than only model \eqref{mod:SENSE-ObsModel_3DReg}  to reconstruct MRI images.
+%The reconstructed and sensitivity  models are interacted each other to improve quality of MRI images by 3D tight framelet regularization.
+%
+%% Regularization 2D $<$ 3D $<$ 3D+sensitivity Updated.
+%
+%
+%
+%%problem \eqref{model:Opt_Model_Gen_w_ST} requires the availability of coil sensitivities. The approach of estimating the coil sensitivities proposed
+%%we experimented with the effect of updating the sensitivity, which can make the reconstruction result less artifacts and the details can be better preserved. We use the phantoms MR images, all the examples are four coils with an image size of 512 $\times$ 512.
+%%
+%%We reconstruct the image by four methods:$W_{2D}$ with fixed sensitivity, $W_{2D}$ with updated sensitivity, $W_{3D}$ with fixed sensitivity and $W_{3D}$ with updated sensitivity, the sampling model is 25\% with 23 ACS Lines, regularization parameter $\lambda_{u} = 0.015$, $\lambda_{s} = 0.05$, $g_{c}$ area size is 48$\times$512. Then we compare the reconstruct result which are shown as Figure \ref{fig:self_cmp_result_Sense_Slice_12}. In order to make the difference more obvious, we zoom-in on the region marked in Figure \ref{fig:self_cmp_Sense_Slice_12} %\subref{fig:self_cmp_reference_512_12}, as shown in Figure \ref{fig:Slice_12_phantom_Rec_Zoomin}.
+%
+%
+%%We will compare the reconstruction result by $W_{2D}$ with fixed sensitivity, $W_{3D}$ with fixed sensitivity and $W_{3D}$ with updated sensitivity, the data we use is the phantom data of 4 coils with an image size of 512$\times$512. The updated sensitivity used by $W_{2D}$ is obtained by our sensitivity update algorithm. Sampling model of 25\% $k$-space data with 23 ACS-Lines are used and the SoS image from full $k$-space and down-sampled $k$-space are shown as Figure\ref{fig:SUpd_512_slice_4}. The reconstructed result of $W_{2D}$, $W_{3D}$ with fixed sensitivity and $W_{3D}$ with updated sensitivity are shown as Figure\ref{fig:SUpd_reconstructed_512_4}, regularization parameter $\lambda_{u} = 0.015$, $\lambda_{s} = 0.005$, $g_c$ area size if 48$\times$512. In order to make the difference more obvious, we zoom-in on the regions marked in Figure\ref{fig:SUpd_512_slice_4} \subref{fig:SUpd_reference_512_4}, as shown in Figure\ref{fig:SUpd_Zoom_512_4_SR25_AC23}.
+%
+%
+%\begin{figure}[htb]
+%\centering
+%\begin{tabular}{ccc}
+%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/05_t2_tse_tra_512_s33_3mm_10_Full_SoS.eps}}&
+%\scalebox{0.187}{\includegraphics*[0,0][683,683]{./PIC/05_t2_tse_tra_512_s33_3mm_10_Coil_4_UniSam_29_ACS_24_Coil_Imgs.eps}}&
+%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/05_t2_tse_tra_512_s33_3mm_10_Uniform29_SoS.eps}}\\
+%(a)&(b)&(c)\\
+%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/Slice_10_phantom_SIIMs_UniSam_29_ACS_24_R_3_4_para_Second_coff_2.5_NoSenUpd.eps}}&
+%%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/Slice_12_env_supd0_SR25_AC23_u001_s005.eps}}&
+%%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/Slice_12_env_SR25_AC23_u001_s005.eps}}\\
+%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/05_t2_tse_tra_512_s33_3mm_10_Coil_4_UniSam_29_ACS_24_Iteru_50_WithoutUpdIterSens__Lev_2_Lam_u_0.001_PD3O_3D.eps}}&
+%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/05_t2_tse_tra_512_s33_3mm_10_Coil_4_UniSam_29_ACS_24_Iteru_50_IterSens_20_Lev_2_Lam_u_0.001_Lam_Sens_0.05_PD3O_3D.eps}}\\
+%(d)&(e)&(f)
+%\end{tabular}
+%\caption{(a) Reference SoS image by full k-space data; (b) Four coil images by 29$\%$  k-space data on uniform sampling mode in Figure~\ref{fig:sampling_model} (a); (c) SoS image by four coil images in (b); (d) 2-Dimensional regularization model \eqref{mod:SENSE-ObsModel_2DReg} by pMRI algorithm FADHFA \cite{Li-Chan-Shen:SIAMIS:16}, (e) 3-Dimensional regularization by the optimization model \eqref{mod:SENSE-ObsModel_3DReg};  (f)  3-Dimensional regularization by the double optimization models: reconstruction model \eqref{mod:SENSE-ObsModel_3DReg} and sensitivity updated model  \eqref{mod:Sensitivity_3DReg-1}.}
+% \label{Fig:phantom_Rec}
+%\end{figure}
+%
+%
+%%\begin{figure}[htb]
+%%\centering
+%%\begin{tabular}{ccc}
+%%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/Slice_12_SoS_Full.eps}}&
+%%\scalebox{0.183}{\includegraphics*[0,0][695,695]{./PIC/Slice_12_4_Img_Sam_25.eps}}&
+%%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/Slice_12_SoS_Part.eps}}\\
+%%(a)&(b)&(c)\\
+%%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/Slice_12_SIIMs_512_Slide_12_SR25_AC23_1_coffer_15_n1_AVKER_4_NoSUpd.eps}}&
+%%%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/Slice_12_env_supd0_SR25_AC23_u001_s005.eps}}&
+%%%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/Slice_12_env_SR25_AC23_u001_s005.eps}}\\
+%%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/05_t2_tse_tra_512_s33_3mm_12_Coil_4_RanSam_25_ACS_23_Iteru_50_WithoutUpdIterSens__Lev_2_Lam_u_0.0006_PD3O_3D.eps}}&
+%%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/05_t2_tse_tra_512_s33_3mm_12_Coil_4_RanSam_25_ACS_23_Iteru_50_IterSens_20_Lev_2_Lam_u_0.0006_Lam_Sens_0.05_PD3O_3D.eps}}\\
+%%(d)&(e)&(f)
+%%\end{tabular}
+%%\caption{(a) Reference SoS image by full k-space data; (b) Four coil images by 25$\%$  k-space data; (c) SoS image by by 25$\%$  k-space data; (d) and (d) zoom-in parts corresponding to (a) and (c), respectively; (d) 2-Dimensional regularization model \eqref{mod:SENSE-ObsModel_2DReg} by pMRI algorithm FADHFA \cite{Li-Chan-Shen:SIAMIS:16}, (e) 3-Dimensional regularization by the optimization model \eqref{mod:SENSE-ObsModel_3DReg};  (f)  3-Dimensional regularization by the double optimization models: reconstruction model \eqref{mod:SENSE-ObsModel_3DReg} and sensitivity updated model  \eqref{mod:Sensitivity_3DReg-1}.}
+%% \label{Fig:phantom_Rec}
+%%\end{figure}
+%
+%\begin{figure}[htb]
+%\begin{tabular}{ccccc}
+%%\scalebox{1.289}{\includegraphics*[110,321][180,391]{./PIC/05_t2_tse_tra_512_s33_3mm_10_Full_SoS.eps}}&
+%%\scalebox{1.289}{\includegraphics*[110,321][180,391]{./PIC/05_t2_tse_tra_512_s33_3mm_10_Uniform29_SoS.eps}}&
+%%\scalebox{1.289}{\includegraphics*[110,321][180,391]{./PIC/Slice_10_phantom_SIIMs_UniSam_29_ACS_24_R_3_4_para_Second_coff_2.5_NoSenUpd.eps}}&
+%%\scalebox{1.289}{\includegraphics*[110,321][180,391]{./PIC/05_t2_tse_tra_512_s33_3mm_10_Coil_4_UniSam_29_ACS_24_Iteru_50_WithoutUpdIterSens__Lev_2_Lam_u_0.001_PD3O_3D.eps}}&
+%%\scalebox{1.289}{\includegraphics*[110,321][180,391]{./PIC/05_t2_tse_tra_512_s33_3mm_10_Coil_4_UniSam_29_ACS_24_Iteru_50_IterSens_20_Lev_2_Lam_u_0.001_Lam_Sens_0.05_PD3O_3D.eps}}
+%%\\
+%\scalebox{1.28}{\includegraphics*[222,85][292,200]{./PIC/05_t2_tse_tra_512_s33_3mm_10_Full_SoS.eps}}&
+%\scalebox{1.28}{\includegraphics*[222,85][292,200]{./PIC/05_t2_tse_tra_512_s33_3mm_10_Uniform29_SoS.eps}}&
+%\scalebox{1.28}{\includegraphics*[222,85][292,200]{./PIC/Slice_10_phantom_SIIMs_UniSam_29_ACS_24_R_3_4_para_Second_coff_2.5_NoSenUpd.eps}}&
+%\scalebox{1.28}{\includegraphics*[222,85][292,200]{./PIC/05_t2_tse_tra_512_s33_3mm_10_Coil_4_UniSam_29_ACS_24_Iteru_50_WithoutUpdIterSens__Lev_2_Lam_u_0.001_PD3O_3D.eps}}&
+%\scalebox{1.28}{\includegraphics*[222,85][292,200]{./PIC/05_t2_tse_tra_512_s33_3mm_10_Coil_4_UniSam_29_ACS_24_Iteru_50_IterSens_20_Lev_2_Lam_u_0.001_Lam_Sens_0.05_PD3O_3D.eps}}
+%\\
+%%\scalebox{1.289}{\includegraphics*[225,82][295,202]
+%(a)&(b)&(c)&(d)&(e)
+%\end{tabular}
+%\caption{Zoom-in parts of Figure \eqref{Fig:phantom_Rec}.  (a) and (b) SoS image of full k-space data  and 29$\%$  k-space data, respectively, (c), (d) and (e) respectively reconstructed  by   2-Dimensional regularization model \eqref{mod:SENSE-ObsModel_2DReg}, 3-Dimensional regularization by the optimization model \eqref{mod:SENSE-ObsModel_3DReg} and 3-Dimensional regularization by the double optimization models: reconstruction model \eqref{mod:SENSE-ObsModel_3DReg} and sensitivity updated model  \eqref{mod:Sensitivity_3DReg-1}.   }
+% \label{Fig:phantom_Rec_Zoomin}
+%\end{figure}
+%
+%
+%
+%
+%\begin{figure}[htb]
+%\centering
+%\begin{tabular}{ccc}
+%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/05_t2_tse_tra_512_s33_3mm_17_Full_SoS.eps}}&
+%\scalebox{0.187}{\includegraphics*[0,0][683,683]{./PIC/05_t2_tse_tra_512_s33_3mm_17_Coil_4_UniSam_29_ACS_24_Coil_Imgs.eps}}&
+%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/05_t2_tse_tra_512_s33_3mm_17_Uniform29_SoS.eps}}\\
+%(a)&(b)&(c)\\
+%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/Slice_17_phantom_SIIMs_UniSam_29_ACS_24_R_3_4_para_First_coff_1.8_NoSenUpd.eps}}&
+%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/Slice_17_phantom_L1ESP_UniSam_29_ACS_24_R_3_4_lambda_0025_Itr_50_kernel_4.eps}}&
+%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/05_t2_tse_tra_512_s33_3mm_17_Coil_4_UniSam_29_ACS_24_Iteru_50_IterSens_20_Lev_2_Lam_u_0.001_Lam_Sens_0.05_PD3O_3D.eps}}\\
+%(d)&(e)&(f)
+%\end{tabular}
+%\caption{(a) Reference SoS image by full k-space data; (b) Four coil images by 29$\%$  k-space data on uniform sampling mode in Figure~\ref{fig:sampling_model} (a); (c) SoS image by four coil images in (b); (d) 2-Dimensional regularization model \eqref{mod:SENSE-ObsModel_2DReg} by pMRI algorithm FADHFA \cite{Li-Chan-Shen:SIAMIS:16}, (e) L1-ESPRiT ;  (f)  3-Dimensional regularization by the double optimization models: reconstruction model \eqref{mod:SENSE-ObsModel_3DReg} and sensitivity updated model  \eqref{mod:Sensitivity_3DReg-1}.}
+% \label{Fig:phantom_Rec2}
+%\end{figure}
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%\subsection{MRI Phantoms }
+%
+%
+%
+%
+%
+%\begin{figure}[htb]
+%\centering
+%\begin{tabular}{ccc}
+%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/Slice_13_phantom_reference.eps}}&
+%\scalebox{0.25}{\includegraphics*[0,0][511,511]{./PIC/Slice_13_phantom_OneCoil_SR15_AC24.eps}}&
+%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/Slice_13_phantom_alised_sos_SR15_AC24.eps}}\\
+%(a)&(b)&(c)\\
+%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/Slice_13_phantom_SIIMS_SR15_AC24.eps}}&
+%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/Slice_13_phantom_L1ESP_SR15_AC24_lambda_002_kernel_6_IterSplit_50.eps}}&
+%\scalebox{0.250}{\includegraphics*[0,0][511,511]{./PIC/05_t2_tse_tra_512_s33_3mm_13_Coil_4_RanSam_15_ACS_24_Iteru_50_IterSens_20_Lev_2_Lam_u_0.0002_Lam_Sens_0.05_PD3O_3D.eps}}\\
+%(d)&(e)&(f)
+%\end{tabular}
+%\caption{(a) Reference SoS image by full k-space data; (b) One of four coil images by 15$\%$  k-space data on sampling mode in Figure~\ref{fig:sampling_model} (b); (c) SoS image by by 15$\%$  k-space data; (d) 2-Dimensional regularization model \eqref{mod:SENSE-ObsModel_2DReg} by pMRI algorithm FADHFA \cite{Li-Chan-Shen:SIAMIS:16}, (e) 3-Dimensional regularization by the optimization model \eqref{mod:SENSE-ObsModel_3DReg};  (f)  3-Dimensional regularization by the double optimization models: reconstruction model \eqref{mod:SENSE-ObsModel_3DReg} and sensitivity updated model  \eqref{mod:Sensitivity_3DReg-1}.}
+% \label{Fig:phantom_13_Rec}
+%\end{figure}
+%
+%
+%\begin{figure}[htb]
+%\centering
+%\begin{tabular}{ccccc}
+%\rotatebox{-90}{\scalebox{1.25}{\includegraphics*[136,304][250,361]{./PIC/Slice_13_phantom_reference.eps}}}&
+%\rotatebox{-90}{\scalebox{1.25}{\includegraphics*[136,304][250,361]{./PIC/Slice_13_phantom_alised_sos_SR15_AC24.eps}}}&
+%\rotatebox{-90}{\scalebox{1.25}{\includegraphics*[136,304][250,361]{./PIC/Slice_13_phantom_SIIMS_SR15_AC24.eps}}}&
+%\rotatebox{-90}{\scalebox{1.25}{\includegraphics*[136,304][250,361]{./PIC/Slice_13_phantom_L1ESP_SR15_AC24_lambda_002_kernel_6_IterSplit_50.eps}}}&
+%\rotatebox{-90}{\scalebox{1.25}{\includegraphics*[136,304][250,361]{./PIC/05_t2_tse_tra_512_s33_3mm_13_Coil_4_RanSam_15_ACS_24_Iteru_50_IterSens_20_Lev_2_Lam_u_0.0002_Lam_Sens_0.05_PD3O_3D.eps}}}\\
+%(a)&(b)&(c)&(d)&(e)%\\
+%%\rotatebox{0}{\scalebox{1.30}{\includegraphics*[232,161][289,275]{./PIC/Slice_13_phantom_reference.eps}}}&
+%%\rotatebox{0}{\scalebox{1.30}{\includegraphics*[232,161][289,275]{./PIC/Slice_13_phantom_alised_sos_SR15_AC24.eps}}}&
+%%\rotatebox{0}{\scalebox{1.30}{\includegraphics*[232,161][289,275]{./PIC/Slice_13_phantom_SIIMS_SR15_AC24.eps}}}&
+%%\rotatebox{0}{\scalebox{1.30}{\includegraphics*[232,161][289,275]{./PIC/Slice_13_phantom_L1ESP_SR15_AC24_lambda_002_kernel_6_IterSplit_50.eps}}}&
+%%\rotatebox{0}{\scalebox{1.30}{\includegraphics*[232,161][289,275]{./PIC/05_t2_tse_tra_512_s33_3mm_13_Coil_4_RanSam_15_ACS_24_Iteru_50_IterSens_20_Lev_2_Lam_u_0.0002_Lam_Sens_0.05_PD3O_3D.eps}}}\\
+%\end{tabular}
+%\caption{Zoomin parts of Figure~\eqref{Fig:phantom_13_Rec}. (a) Reference SoS image by full k-space data; (b) SoS image by by 15$\%$  k-space data; (c) 2-Dimensional regularization model \eqref{mod:SENSE-ObsModel_2DReg} by pMRI algorithm FADHFA \cite{Li-Chan-Shen:SIAMIS:16}, (d) 3-Dimensional regularization by the optimization model \eqref{mod:SENSE-ObsModel_3DReg};  (e)  3-Dimensional regularization by the double optimization models: reconstruction model \eqref{mod:SENSE-ObsModel_3DReg} and sensitivity updated model  \eqref{mod:Sensitivity_3DReg-1}.}
+% \label{Fig:phantom_13_Zoomin}
+%\end{figure}
+%
+%
+%\subsection{In-vivo Data}
+
+
+
+
+
+\section*{References}
+%\begin{thebibliography}
+\bibliographystyle{IEEEtran}
+%\bibliographystyle{abbrv}
+%\bibliographystyle{siam}
+\bibliography{pMRI}
+%\end{thebibliography}
+
+
+
+\end{document}
