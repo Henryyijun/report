@@ -136,23 +136,126 @@ where,
 	\mathcal{P}GMu \approx g
 \end{equation}
 
+\section{Regularization with two level tight framelet systems}
+\subsection{DHF}
+\par The tight framelets in the first level is the directional Haar framelet (DHF) system, the filters associated with the DHF are
+\begin{align*}
+	\tau_0 = \frac{1}{4}\begin{bmatrix}
+		1 & 1\\
+		1 & 1
+	\end{bmatrix},
+	\tau_1 = \frac{1}{4}\begin{bmatrix}
+		1 & 0\\
+		0 & -1
+	\end{bmatrix},
+	\tau_2 = \frac{1}{4}\begin{bmatrix}
+		0 & -1\\
+		1 & 0
+	\end{bmatrix},
+	\tau_3 = \frac{1}{4}\begin{bmatrix}
+		1 & -1\\
+		0 & 0
+	\end{bmatrix},\\
+	\tau_4 = \frac{1}{4}\begin{bmatrix}
+		1 & 0\\
+		-1 & 0
+	\end{bmatrix},
+	\tau_5 = \frac{1}{4}\begin{bmatrix}
+		0 & 0\\
+		1 & -1
+	\end{bmatrix},
+	\tau_6 = \frac{1}{4}\begin{bmatrix}
+		0 & 1\\
+		0 & -1
+	\end{bmatrix}.
+\end{align*}
+Let $M_k$ denotes the associated matrix representation of the filters $\tau_k$, therefore
+\begin{equation*}
+	B_{1l} = M_0 , B_{1h} = [M_1^T,\cdots, M_6^T]^T
+\end{equation*}
+\par Let $\Phi_{1 \Lambda} : R^{6n} \rightarrow R$ can be defined through a function $\varphi_1:R^6 \rightarrow R$ and a non-negative parameter vector $\Lambda =[ \lambda_1, \lambda_2, \cdots, \lambda_n]$ as  follows
+\begin{equation*}
+	\Phi_{1 \Lambda}(v) = \sum_{i= 1}^{n} \lambda_i \varphi_1(v_i, v_{i+n}, \cdots, v_{i+5n})
+\end{equation*}
+In this model, $\varphi_1(x_1, x_2,x_3,x_4,x_5,x_6) = \sqrt{|x_1|^2+|x_2|^2}+\sqrt{|x_3|^2+|x_4|^2}$
+
+\subsection{DCT-based tight framelet}
+\par The tight framelet in the second level is generated from the standard $3 \times 3$ DCT-II orthogonal matrix , the filters are
+\begin{align*}
+	\tau_0=\frac{1}{9}\begin{bmatrix}
+		1 & 1 & 1\\
+		1 & 1 & 1\\
+		1 & 1 & 1
+	\end{bmatrix},
+	\tau_1=\frac{\sqrt{6}}{18}\begin{bmatrix}
+		1 & 0 & -1\\
+		1 & 0 & -1\\
+		1 & 0 & -1
+	\end{bmatrix},
+	\tau_2=\frac{\sqrt{2}}{18}\begin{bmatrix}
+		1 & -2 & 1\\
+		1 & -2 & 1\\
+		1 & -2 & 1
+	\end{bmatrix},\\
+	\tau_3=\frac{\sqrt{6}}{18}\begin{bmatrix}
+		1 & 1 & 1\\
+		0 & 0 & 0\\
+		-1 & -1 & -1
+	\end{bmatrix},
+	\tau_4=\frac{1}{6}\begin{bmatrix}
+		1 & 0 & -1\\
+		0 & 0 & 0\\
+		-1 & 0 & 1
+	\end{bmatrix},
+	\tau_5=\frac{\sqrt{3}}{18}\begin{bmatrix}
+		1 & -2 & 1\\
+		0 & 0 & 0\\
+		-1 & 2 & -1
+	\end{bmatrix},  \\
+	\tau_6=\frac{\sqrt{2}}{18}\begin{bmatrix}
+		1 & 1 & 1\\
+		-2 & -2 & -2\\
+		1 & 1 & 1
+	\end{bmatrix}, 
+	\tau_7=\frac{\sqrt{3}}{18}\begin{bmatrix}
+		1 & 0 & -1\\
+		-2 & 0 & 2\\
+		1 & 0 & -1
+	\end{bmatrix},
+	\tau_7=\frac{1}{18}\begin{bmatrix}
+		1 & -2 & 1\\
+		-2 & 4 & -2\\
+		1 & -2 & 1
+	\end{bmatrix},
+\end{align*}
+Let $P_k$ denotes the associated matrix representation of the filters $\tau_k$, therefore
+\begin{equation*}
+	B_{1l} = P_0 , B_{1h} = [P_1^T,\cdots, P_8^T]^T
+\end{equation*}
+Let $\Phi_{2 \Theta} : R^{8n} \rightarrow R$ be defined through a nonnegative parameter sequence $\Theta = \{\theta_i = (\theta_{i1}, \theta_{i2}, \cdots , \theta_{i8}) \in R^{8n} : 1\le i \le n\}$  non-negative elements as follows
+\begin{equation*}
+	\Phi_{2 \Theta}(v) = \sum_{i=1}^{n} \|[\theta_{i1}v_i, \theta_{i2} v_{i+n}, \cdots, \theta_{i8} v_{i+7n} ]\|_1
+\end{equation*}
+
+
 \section{Calibration Observation Model}
+\subsection{Model}
 \par According to the model (\ref{eq:system_equation}) and (\ref{GRAPPA_equation}), we propose the following optimization model as
 \begin{equation}\label{mod_double_reg}
 	\min_{u} \left\{\frac{1}{2}\|\mathcal{P}Mu-g\|_2^2+  \frac{\lambda}{2}\|\mathcal{P}GMu-g \|_2^2 + \Phi_{1 \Lambda}(B_{1h} u) + \Phi_{2 \Theta}(B_{2h}B_{1l} u) \right\} 
 \end{equation}
-Model (\ref{mod_double_reg}) can be solved by PD3O.Define 
+where $\lambda$ is equal to 1 by default. Define 
 \begin{equation*}
 	f(u) = \frac{1}{2}\|\mathcal{P}Mu-g\|_2^2+  \frac{\lambda}{2}\|\mathcal{P}GMu-g \|_2^2, \quad h(s) = \Phi_{1 \Lambda}(B_{1h} s_1) + \Phi_{2 \Theta}(B_{2h}B_{1l} s_2),\quad A = \begin{bmatrix}
 		B_{1h} \\
 		B_{2h}B_{1l}
 	\end{bmatrix}
 \end{equation*}
-where $s = (s_1, s_2)$. Then, the model(\ref{mod_double_reg}) can be rewriten as 
+where $s = (s_1, s_2)$. Therefore, the model(\ref{mod_double_reg}) can be rewriten as 
 \begin{equation}
 	\min_{u} \left\{ f(u) + h(Au) \right\}
 \end{equation}
-\par  $f(u) = \frac{1}{2}\|\mathcal{P}Mu-g\|_2^2+  \frac{\lambda}{2}\|\mathcal{P}GMu-g \|_2^2$ can be rewritten as:
+$f(u) = \frac{1}{2}\|\mathcal{P}Mu-g\|_2^2+  \frac{\lambda}{2}\|\mathcal{P}GMu-g \|_2^2$ can be rewritten as:
 \begin{equation}\label{eq:fun}
 	f(u) = \frac{1}{2}\left 
 	\|\begin{bmatrix}
@@ -160,7 +263,7 @@ where $s = (s_1, s_2)$. Then, the model(\ref{mod_double_reg}) can be rewriten as
 		\sqrt{\lambda}\mathcal{P}GM 
 	\end{bmatrix} u - 
 	\begin{bmatrix}
-		g \\ g
+		g \\ \sqrt{\lambda}g
 	\end{bmatrix}
 	\right \|_2^2
 \end{equation}
@@ -176,9 +279,12 @@ where
 	\end{bmatrix},
 	y = \begin{bmatrix}
 		g \\
-		g
+		\sqrt{\lambda}g
 	\end{bmatrix}
 \end{equation*}
+
+
+
 \par Accoding to the function $f$, we have that $\nabla f(u) = K^T(Ku-y) = M^T \mathcal{P}^T (\mathcal{P}Mu-g) + \lambda M^T G^T \mathcal{P}^T(\mathcal{P}GMu-g)$, and we can find that the gradient of $f$ is $\|K\|^2$-Lipschitz continuous.
 
 Choosing $\gamma $ and $\delta$ such that $\gamma < 2/ \|K\|^2$ and $\gamma \delta < 1$. The PD3O has the following iteration:
@@ -194,7 +300,7 @@ According to the Moreau decomposition, we can get
 	s^{k+1} = x^k - \delta prox_{\delta^{-1} h} (\delta^{-1} x^k)
 \end{equation}
 where $x^k = (I-\gamma \delta AA^T)s^k + \delta A(2u^k-v^k-\gamma \nabla f(u^k))$
-\begin{algorithm}[t]
+\begin{algorithm}
 	\caption{\textbf{Double Domain Reconstruction Algorithm}}
 	\label{Alg:scanMatching}
 	\begin{algorithmic}[1]
@@ -210,13 +316,15 @@ where $x^k = (I-\gamma \delta AA^T)s^k + \delta A(2u^k-v^k-\gamma \nabla f(u^k))
 		\State \textbf{end while} 
 	\end{algorithmic}
 \end{algorithm}
+\subsection{The calculation of the Lipschitz constant of the gradient of $f$}
+\par To solve the model (\ref{mod_double_reg}), we need to estimate the Lipschitz constant of the $f$. Note that $\nabla f(u) = K^T(Ku - y)$, then the gradient of $f$ is $\|K\|^2_2$-Lipschitz continuous, 
 \begin{equation*}
 	\begin{aligned}
-	\|K\|^2 = \| K^T K\| &= \left \| 
+	\|K\|^2_2 = \| K^T K\|_2 &= \left \| 
 	\begin{bmatrix}
 		\mathcal{P} M \\
 		\mathcal{P} GM
-	\end{bmatrix}^T
+	\end{bmatrix}^T_2
 	\begin{bmatrix}
 		\mathcal{P} M \\
 		\mathcal{P} GM
@@ -230,22 +338,51 @@ where $x^k = (I-\gamma \delta AA^T)s^k + \delta A(2u^k-v^k-\gamma \nabla f(u^k))
 	 		\mathcal{P} M \\
 	 		\mathcal{P} GM
 	 	\end{bmatrix}
-		\right\| \\
+		\right\|_2 \\
 		& = \left\|
 		\begin{bmatrix}
 			M^T \mathcal{P}^T \mathcal{P}M + M^T G^T\mathcal{P}^T \mathcal{P}GM
 		\end{bmatrix}
-		\right\| \\
+		\right\|_2 \\
 		&\le  
 		\left \|
 			M^T \mathcal{P}^T \mathcal{P}M 
-		\right\|
+		\right\|_2
 		+
 		\left \|
 			M^T G^T\mathcal{P}^T \mathcal{P}GM 
-		\right\|
+		\right\|_2 \\
+		& = \left \|
+		M^T \mathcal{P}^T \mathcal{P}M 
+		\right\|_2 +  \left \|
+		S^TF^T G^T\mathcal{P}^T \mathcal{P}GFS
+		\right\|_2 \\
+		& = \left \|
+		S^TF^T  \mathcal{P}FS
+		\right\|_2+  \left \|
+		S^TF^T G^T \mathcal{P}GFS
+		\right\|_2 \\
 	\end{aligned}
 \end{equation*}
-
+\par Based on the previous work, we have known a constant $k$ related to the sensitivity $S_i$ which is defined as 
+\begin{equation}
+	k=\max_j \sum_{i}^{p}| s_j^i|^2
+\end{equation}
+where $s_j^i$  the $k$th diagonal element of the sensitivity matrix $S_i$, is the sensitivity coefficient of the $i$th coil at the $k$th pixel. And we have 
+\begin{equation}
+	\begin{aligned}
+	\|K\|^2_2 &\le  \left \|
+	S^TF^T  \mathcal{P}FS
+	\right\|_2+  \left \|
+	S^TF^T G^T \mathcal{P}GFS
+	\right\|_2 \\
+	&\le k(\left \|
+	F^T  \mathcal{P}F
+	\right\|_2+  \left \|
+	F^T G^T \mathcal{P}GF
+	\right\|_2) \\
+	&\le k(1+C)
+	\end{aligned}
+\end{equation}
 
 \end{document}

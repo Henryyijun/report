@@ -1,4 +1,9 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{SENSE model}{}% 2
 \BOOKMARK [1][-]{section.3}{GRAPPA model}{}% 3
-\BOOKMARK [1][-]{section.4}{Calibration Observation Model}{}% 4
+\BOOKMARK [1][-]{section.4}{Regularization with two level tight framelet systems}{}% 4
+\BOOKMARK [2][-]{subsection.4.1}{DHF}{section.4}% 5
+\BOOKMARK [2][-]{subsection.4.2}{DCT-based tight framelet}{section.4}% 6
+\BOOKMARK [1][-]{section.5}{Calibration Observation Model}{}% 7
+\BOOKMARK [2][-]{subsection.5.1}{Model}{section.5}% 8
+\BOOKMARK [2][-]{subsection.5.2}{The calculation of the Lipschitz constant of the gradient of f}{section.5}% 9

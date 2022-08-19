@@ -112,18 +112,32 @@
 
 \subsection{基于深度学习的重建方法}
 \par 近年来，机器学习和深度学习等方法快速发展，深度学习的方法也被应用于磁共振成像重建问题中。深度学习使用大量的数据进行训练，通过挖掘$k$-空间数据和目标图像之间的关系完成重建，具体可以分为两类方法，分别是(1)基于模型的方法(Model-based)和(2)基于数据驱动型(data driven)方法。基于模型的方法将传统优化算法和神经网络相结合，用于提高重建质量；数据驱动型方法是一种端到端的学习方法，其依赖于深度神经网络(DNN)来学习非线性重构的过程。
+<<<<<<< Updated upstream
 
 \par MoDL\cite{aggarwal2018modl}基于pMRI成像模型，提出基于卷积神经网络(CNN)正则化的重建模型，该模型使用CNN提取图像的先验信息，使用数值算法和神经网络训练相结合的方法提高重建质量，是一种基于模型的方法。Luo等人根据最新提出的PixelCNN+\cite{salimans2017pixelcnn++}，提出基于深度贝叶斯估计的重建模型\cite{luo2020mri}，该模型通过贝叶斯定理，将MRI问题进行建模，通过最大化概率的方法完成对欠采样$k$-空间的重建。基于ESPIRiT方法，文\cite{sandino2021accelerating}中提出DL-ESPIRiT， 设计一种基于(2+1)D的时空卷积神经网络，先使用2D卷积核，然后再使用1D卷积核，产生了比直接使用3D卷积神经网络更好的重建效果。基于CS-MRI，Yang等人提出一种新的网络框架ADMM-Net\cite{yang2016deep}，该模型将ADMM算法结合卷积神经网络，使用端到端的训练方法。Yang等人基于CS-MRI和生成性对抗神经网络(GAN)，提出一种新的重建模型DAGAN\cite{yang2017dagan}，该模型在保留了图像较多细节的情况下并且拥有更高的重建质量，而且其重建质量高于ADMM-Net。
 \par GRAPPA作为传统的重建方法之一，其思想也被众多学者纳入深度学习重建方法中。文\cite{9157643}提出深度学习和并行成像相结合的GRAPPANet，该网络框架包含两个卷积神经网络(CNN)，在它们两个之间使用传统的GRAPPA算法，该框架将第一个CNN的结果作为输入，经过GRAPPA处理后，将处理结果通过第二个CNN进行训练，模型训练流程如图\ref{GRAPPANet}所示。相比于GRAPPA的线性插值方法，文\cite{Mehmet2019Scan}提出Robust artificial neural networks for $k$-space interpolation(RAKI)，该算法使用深度网络对ACS数据进行训练得到插值核，进而通过非线性估计的方法计算得到缺失数据。文\cite{WANG2020136}提出一种基于深度残余网络的多线圈并行成像重建算法(DeepcomplexMRI)，该算法无需依赖于线圈灵敏度和图像的先验知识，使用复卷积网络对MRI数据的实部和虚部分别训练，并且在训练过程中施加$k$-空间数据一致性约束。
+=======
+\par \textbf{1 基于模型的方法：}
+\par MoDL\cite{aggarwal2018modl}基于pMRI成像模型，提出基于卷积神经网络(CNN)正则化的重建模型，该模型使用CNN提取图像的先验信息，使用数值算法和神经网络训练相结合的方法提高重建质量，是一种基于模型的方法。基于ESPIRiT方法，文\cite{sandino2021accelerating}中提出DL-ESPIRiT， 设计一种基于(2+1)D的时空卷积神经网络，先使用2D卷积核，然后再使用1D卷积核，产生了比直接使用3D卷积神经网络更好的重建效果。基于CS-MRI，Yang等人提出一种新的网络框架ADMM-Net\cite{yang2016deep}，该模型将ADMM算法结合卷积神经网络，使用端到端的训练方法。Yang等人基于CS-MRI和生成性对抗神经网络(GAN)，提出一种新的重建模型DAGAN\cite{yang2017dagan}，该模型在保留了图像较多细节的情况下并且拥有更高的重建质量，而且其重建质量高于ADMM-Net。文\cite{hammernik2018learning}提出一种变分网络(Variatinal Network, VN)，该方法将数学变分模型和深度神经网络相结合，将每一次的迭代重建与网络中的每一步骤相对应，即VN包含了数学优化模型中梯度下降的步骤。文\cite{LU2020106790}将pFISTA-SENSE的迭代过程作为ResNet的基本网络结构，提出了pFISTA-SENSE-ResNet模型，得到了比MoDL和VN质量更高的MRI重建图像。
+
+\par \textbf{2 基于数据驱动型的方法：}
+\par 文\cite{han2019k}使用基于数据驱动的框架将卷积神经网络与Hankel矩阵分解联系起来，提出了一种基于数据驱动型的$k$-空间插值的深度学习算法。Luo\cite{luo2020mri}采用贝叶斯理论将MRI重建问题转化为一个后验概率问题，利用GAN网络产生图像的先验信息，最后通过最大化后验概率进行图像重建。 GRAPPA作为传统的重建方法之一，其思想也被众多学者纳入深度学习重建方法中。文\cite{9157643}使用深度学习结合传统重建方法GRAPPA，提出GRAPPANet，由两个卷积神经网络(CNN)组成，该算法首先使用GRAPPA从ACS数据中估计得到插值核，同时第一个卷积网络将R倍欠采样的$k$-空间数据映射为$R^{'}$倍的欠采样的$k$-空间数据，然后将GRAPPA插值核应用于$R^{'}$倍欠采样的数据，然后将。模型训练流程如图\ref{GRAPPANet}所示。相比于GRAPPA的线性插值方法，文\cite{Mehmet2019Scan}提出Robust artificial neural networks for $k$-space interpolation(RAKI)，该方法从ACS数据中学习得到非线性的卷积神经网络，然后使用该卷积网络在$k$-空间中对缺失的数据进行非线性估计。。文\cite{WANG2020136}提出一种基于深度残余网络的多线圈并行成像重建算法(DeepcomplexMRI)，该算法无需依赖于线圈灵敏度和图像的先验知识，使用复卷积网络对MRI数据的实部和虚部分别训练，并且在训练过程中施加$k$-空间数据一致性约束。
+>>>>>>> Stashed changes
 \begin{figure}[ht]
 	\centering
 	\includegraphics[scale=1]{./image/GRAPPANet.png}
 	\caption{The GRAPPANet model}
 	\label{GRAPPANet}
 \end{figure}
+<<<<<<< Updated upstream
 \par 文\cite{hammernik2018learning}提出一种变分网络(Variatinal Network, VN)，该方法将数学变分模型和深度神经网络相结合，将每一次的迭代重建与网络中的每一步骤相对应，即VN包含了数学优化模型中梯度下降的步骤。文\cite{LU2020106790}将pFISTA-SENSE的迭代过程作为ResNet的基本网络结构，提出了pFISTA-SENSE-ResNet模型，得到了比MoDL和VN质量更高的MRI重建图像。
 \par 但是从目前来说，基于深度学习的方法仍未得到广泛应用，主要原因有：数据难以获取；训练得到的模型泛化能力不够强；当数据之间差异较大时，模型的重建结果质量较差；同时图像重建质量也容易到MRI设备参数的影响。
 \cite{LI2021332}
+=======
+\par 基于深度学习的方法仍未得到广泛应用，主要原因有：由于病人隐私等问题的存在，MRI原始数据难以获取；训练得到的模型泛化能力不够强，当数据之间差异较大时，模型的重建结果质量较差；同时图像重建质量也容易到MRI设备参数的影响。更重要的是，使用深度学习进行MRI重建的方法与传统MRI重建方法相比，目前尚未体现其优越性，主要在重建图像质量和重建时间，并且还比较耗费资源用于训练模型。
+
+
+>>>>>>> Stashed changes
 
 \newpage
 \bibliographystyle{IEEEtran}
