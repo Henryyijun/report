@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2021.12.27)  19 AUG 2022 15:23
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2021.12.27)  5 SEP 2022 15:26
 entering extended mode
 **校正模型.tex
 (E:\DeepLearning\report\2022-7-8\校正模型.tex
@@ -1311,25 +1311,25 @@ File: UTF8.enc 2008/12/29 4.8.2
 (D:\CTEX\MiKTeX\tex\latex\cjk\UTF8\UTF8.chr
 File: UTF8.chr 2008/12/29 4.8.2
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 96.
+LaTeX Font Info:    Try loading font information for U+msa on input line 97.
 
 (D:\CTEX\MiKTeX\tex\latex\amsfonts\umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 96.
+LaTeX Font Info:    Try loading font information for U+msb on input line 97.
 
 (D:\CTEX\MiKTeX\tex\latex\amsfonts\umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for C70+rm on input line 96.
+LaTeX Font Info:    Try loading font information for C70+rm on input line 97.
 
 (D:\CTEX\MiKTeX\tex\latex\ctex\fd\c70rm.fd
 File: c70rm.fd 2007/05/06 v0.8a ctexutf8 font definition file
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 97.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 98.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 140.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 103.
  [1
 Non-PDF special ignored!
 Non-PDF special ignored!
@@ -1345,31 +1345,31 @@ Non-PDF special ignored!
 Non-PDF special ignored!
 Non-PDF special ignored!] [2]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 304.
+put line 308.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 304.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 308.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 319.
+(hyperref)                removing `math shift' on input line 323.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 319.
+(hyperref)                removing `math shift' on input line 323.
 
 [3] [4]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 388.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 388.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 392.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 392.
  (E:\DeepLearning\report\2022-7-8\校正模型.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 388.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 388.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 392.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 392.
 Package rerunfilecheck Info: File `校正模型.out' has not changed.
-(rerunfilecheck)             Checksum: 1527790219329D2E817E6E2CD7AD47B1;590.
+(rerunfilecheck)             Checksum: F714C8A15A282D0CA829D74793ABFC4F;630.
  ) 
 Here is how much of TeX's memory you used:
  18145 strings out of 495354
- 268735 string characters out of 3183858
- 452101 words of memory out of 3000000
+ 268745 string characters out of 3183858
+ 451156 words of memory out of 3000000
  20880 multiletter control sequences out of 15000+200000
  22595 words of font info for 58 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -1386,7 +1386,7 @@ sfonts/cm/cmsy5.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D
 :/CTEX/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><D:/CTEX/MiKTeX/fo
 nts/type1/urw/times/utmb8a.pfb><D:/CTEX/MiKTeX/fonts/type1/urw/times/utmr8a.pfb
 >
-Output written on 校正模型.pdf (4 pages, 177400 bytes).
+Output written on 校正模型.pdf (4 pages, 178291 bytes).
 PDF statistics:
  149 PDF objects out of 1000 (max. 8388607)
  25 named destinations out of 1000 (max. 500000)

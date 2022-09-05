@@ -92,12 +92,16 @@
 \begin{document}
 \author{Henry}
 \title{Calibration Observation Model for Parallel Magnetic Resonance Imaging}
+
 \maketitle
 
 \section{Introduction}
-\par SENSE and GRAPPA are widely used in clinical application, but these two models have some shortcomings. For the SENSE method, the coil sensitivity can be estimated, but it is still not accuracy. For the another method, the interpolation kernel can be estimated by the auto calibraion signal(ACS) while it's not accuracy when the number of the ACS line is far from enough.
-\par Therefore, we propose the calibration observation model incoporating the advantage of the SENSE and GRAPPA. We exploit the SENSE model to remove artifacts in image domain and use GRAPPA kernel to regularize the SENSE model in K-space domain.
-\section{SENSE model}
+\par Magnetic Resonance Imaging (MRI) is a non-invasive medical imaging technology, which not only does'nt use ionizing radiation, but also can obtain high-resolution and high-quality pathological images. However, MRI is different from Computed Tomography(CT) and other imaging methods in that they have the characteristic of fast imaging time. The biggest obstacle of MRI is that its data acquisition is too slow, which result in patients feel uncomfortable.Thus, the main research purpose of MRI technology is to shorten the imaging time and improve the imaging quality. 
+\par Parallel MRI (pMRI) technology is used to shorten the imaging time by the hardware, it uses a series of coils to acqucire the undersampling MR signal at the meantime, then uses the reconstruction algorithm to predict high-resolution MR image by partial k-space data. The most commonly used reconstruction algorithms can divided into two catagories, the image domain method(e.g. SENSE) and the k-space domain method(e.g. GRAPPA).
+
+\par SENSE and GRAPPA are widely used in clinical application, but these two models have some shortcomings. For the SENSE method, the coil sensitivity can be estimated, but it is still not accuracy. For the another method, the interpolation kernel can be estimated by the auto calibraion signal(ACS) while it's not accuracy when the number of the ACS line is far from enough. Therefore, we propose the calibration observation model incoporating the advantage of the SENSE and GRAPPA. We exploit the SENSE model to remove artifacts in image domain and use GRAPPA kernel to regularize the SENSE model in K-space domain.
+\subsection{SENSE-based pMRI reconstruction model}
+
 \par The coil data from the $j$th coil can modeled as follows:
 \begin{equation}\label{eq:coil_equation}
 	g_l = PFS_lu + \eta
